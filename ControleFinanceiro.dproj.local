@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/02/13 10:36:29.000.974,=C:\Users\emirc\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/02/13 10:37:17.000.125,C:\Users\emirc\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas=D:\Projetos\Delphi\ControleFinanceiro\uMain.pas</Transaction>
+    <Transaction>2025/02/13 10:37:17.000.125,C:\Users\emirc\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=D:\Projetos\Delphi\ControleFinanceiro\uMain.dfm</Transaction>
+    <Transaction>2025/02/13 10:37:27.000.471,C:\Users\emirc\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj=D:\Projetos\Delphi\ControleFinanceiro\ControleFinanceiro.dproj</Transaction>
+    <Transaction>2025/02/13 10:38:59.000.012,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/13 10:39:13.000.900,D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm=D:\Projetos\Delphi\ControleFinanceiro\uDM.dfm</Transaction>
+    <Transaction>2025/02/13 10:39:13.000.900,D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas=D:\Projetos\Delphi\ControleFinanceiro\uDM.pas</Transaction>
+    <Transaction>2025/02/13 10:50:12.000.591,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/13 10:51:16.000.371,D:\Projetos\Delphi\ControleFinanceiro\uCategoriasDespesa.dfm=D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm</Transaction>
+    <Transaction>2025/02/13 10:51:16.000.371,D:\Projetos\Delphi\ControleFinanceiro\uCategoriasDespesa.pas=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/13 12:19:51.000.863,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/13 12:20:46.000.880,D:\Projetos\Delphi\ControleFinanceiro\uCategoriasReceita.pas=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/13 12:20:46.000.880,D:\Projetos\Delphi\ControleFinanceiro\uCategoriasReceita.dfm=D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm</Transaction>
+    <Transaction>2025/02/14 08:20:23.000.802,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/14 08:21:04.000.301,D:\Projetos\Delphi\ControleFinanceiro\uGeracaoParcelas.dfm=D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm</Transaction>
+    <Transaction>2025/02/14 08:21:04.000.301,D:\Projetos\Delphi\ControleFinanceiro\uGeracaoParcelas.pas=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/14 17:47:38.000.206,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/14 17:48:50.000.989,D:\Projetos\Delphi\ControleFinanceiro\uCalendario.pas=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/14 17:48:50.000.989,D:\Projetos\Delphi\ControleFinanceiro\uCalendario.dfm=D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm</Transaction>
+    <Transaction>2025/02/16 19:42:37.000.650,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/16 19:43:15.000.152,D:\Projetos\Delphi\ControleFinanceiro\uRelDespesasDoMes.dfm=D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm</Transaction>
+    <Transaction>2025/02/16 19:43:15.000.152,D:\Projetos\Delphi\ControleFinanceiro\uRelDespesasDoMes.pas=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/16 19:45:22.000.043,D:\Projetos\Delphi\ControleFinanceiro\uRelDespesasDoMes.pas=</Transaction>
+    <Transaction>2025/02/17 16:56:21.000.753,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/17 16:57:12.000.320,D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm=D:\Projetos\Delphi\ControleFinanceiro\uLogin.dfm</Transaction>
+    <Transaction>2025/02/17 16:57:12.000.320,D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas=D:\Projetos\Delphi\ControleFinanceiro\uLogin.pas</Transaction>
+    <Transaction>2025/02/17 18:01:30.000.173,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/17 18:01:48.000.671,D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas=D:\Projetos\Delphi\ControleFinanceiro\uFuncoes.pas</Transaction>
+    <Transaction>2025/02/18 13:49:41.000.686,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/18 13:50:04.000.129,D:\Projetos\Delphi\ControleFinanceiro\uUsuarios.pas=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/18 13:50:04.000.129,D:\Projetos\Delphi\ControleFinanceiro\uUsuarios.dfm=D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm</Transaction>
+    <Transaction>2025/02/24 17:50:00.000.990,=D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas</Transaction>
+    <Transaction>2025/02/24 17:50:54.000.788,D:\Projetos\Delphi\ControleFinanceiro\Unit1.pas=D:\Projetos\Delphi\ControleFinanceiro\uImprDespesas.pas</Transaction>
+    <Transaction>2025/02/24 17:50:54.000.788,D:\Projetos\Delphi\ControleFinanceiro\Unit1.dfm=D:\Projetos\Delphi\ControleFinanceiro\uImprDespesas.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
