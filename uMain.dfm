@@ -36,20 +36,18 @@ object frmMain: TfrmMain
     AlignWithMargins = True
     Left = 8
     Top = 45
-    Width = 1072
+    Width = 1120
     Height = 412
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = '   Despesas   '
     TabOrder = 3
-    ExplicitWidth = 1068
-    ExplicitHeight = 411
     DesignSize = (
-      1072
+      1120
       412)
     object lblTotalDespesas: TLabel
       Left = 904
       Top = 198
-      Width = 157
+      Width = 205
       Height = 15
       Alignment = taRightJustify
       Anchors = [akLeft, akRight, akBottom]
@@ -66,7 +64,7 @@ object frmMain: TfrmMain
     object grdDespesas: TDBGrid
       Left = 3
       Top = 24
-      Width = 1066
+      Width = 1110
       Height = 169
       TabStop = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -129,14 +127,14 @@ object frmMain: TfrmMain
     object pnlDadosDespesas: TPanel
       Left = 3
       Top = 226
-      Width = 1067
+      Width = 1115
       Height = 183
       Anchors = [akLeft, akRight, akBottom]
       TabOrder = 1
       ExplicitTop = 225
-      ExplicitWidth = 1063
+      ExplicitWidth = 1051
       DesignSize = (
-        1067
+        1115
         183)
       object lblValorPago: TLabel
         Left = 744
@@ -235,11 +233,11 @@ object frmMain: TfrmMain
         AlignWithMargins = True
         Left = -8
         Top = 106
-        Width = 1070
+        Width = 1118
         Height = 78
         Anchors = [akLeft, akRight, akBottom]
         TabOrder = 7
-        ExplicitWidth = 1066
+        ExplicitWidth = 1054
         object btnNovoDespesa: TBitBtn
           AlignWithMargins = True
           Left = 4
@@ -373,18 +371,18 @@ object frmMain: TfrmMain
         end
         object btnImprimirDespesasDoMes: TBitBtn
           AlignWithMargins = True
-          Left = 966
+          Left = 1014
           Top = 4
           Width = 100
           Height = 70
           Align = alRight
           TabOrder = 6
           OnClick = btnImprimirDespesasDoMesClick
-          ExplicitLeft = 962
+          ExplicitLeft = 950
         end
       end
       object btnGerarParcelasDoAno: TBitBtn
-        Left = 958
+        Left = 1006
         Top = 9
         Width = 100
         Height = 70
@@ -392,7 +390,7 @@ object frmMain: TfrmMain
         Caption = '&Gerar Parcelas'
         TabOrder = 8
         OnClick = btnGerarParcelasDoAnoClick
-        ExplicitLeft = 954
+        ExplicitLeft = 942
       end
       object edtValorPago: TDBEdit
         Left = 793
@@ -449,7 +447,7 @@ object frmMain: TfrmMain
         Height = 36
         Caption = '   Mostrar Despesas   '
         Columns = 3
-        ItemIndex = 0
+        ItemIndex = 1
         Items.Strings = (
           'Todas'
           'Somente N'#227'o Pagas'
@@ -472,15 +470,13 @@ object frmMain: TfrmMain
     AlignWithMargins = True
     Left = 8
     Top = 474
-    Width = 1072
+    Width = 1120
     Height = 299
     Anchors = [akLeft, akRight, akBottom]
     Caption = '   Receitas   '
     TabOrder = 4
-    ExplicitTop = 473
-    ExplicitWidth = 1068
     DesignSize = (
-      1072
+      1120
       299)
     object lblDTRecebimento: TLabel
       Left = 750
@@ -530,7 +526,7 @@ object frmMain: TfrmMain
     object lblTotalReceitas: TLabel
       Left = 904
       Top = 144
-      Width = 157
+      Width = 205
       Height = 15
       Alignment = taRightJustify
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -555,7 +551,7 @@ object frmMain: TfrmMain
     object grdReceitas: TDBGrid
       Left = 3
       Top = 24
-      Width = 1064
+      Width = 1112
       Height = 114
       TabStop = False
       Anchors = [akLeft, akRight, akBottom]
@@ -618,11 +614,11 @@ object frmMain: TfrmMain
     object pnlBotoesReceitas: TPanel
       Left = 2
       Top = 219
-      Width = 1068
+      Width = 1116
       Height = 78
       Align = alBottom
       TabOrder = 7
-      ExplicitWidth = 1064
+      ExplicitWidth = 1052
       object btnNovoReceita: TBitBtn
         AlignWithMargins = True
         Left = 4
@@ -682,7 +678,7 @@ object frmMain: TfrmMain
       end
       object btnSair: TBitBtn
         AlignWithMargins = True
-        Left = 964
+        Left = 1012
         Top = 4
         Width = 100
         Height = 70
@@ -690,7 +686,7 @@ object frmMain: TfrmMain
         Caption = 'Sai&r'
         TabOrder = 6
         OnClick = btnSairClick
-        ExplicitLeft = 960
+        ExplicitLeft = 948
       end
       object grpTotaisReceitas: TGroupBox
         Left = 558
@@ -840,7 +836,7 @@ object frmMain: TfrmMain
     OnChange = cboMesAnoChange
   end
   object btnCalendario: TBitBtn
-    Left = 969
+    Left = 1017
     Top = 8
     Width = 100
     Height = 31
@@ -848,7 +844,6 @@ object frmMain: TfrmMain
     Caption = '&Calend'#225'rio'
     TabOrder = 2
     OnClick = btnCalendarioClick
-    ExplicitLeft = 965
   end
   object edtPesquisa: TEdit
     Left = 220
@@ -973,8 +968,8 @@ object frmMain: TfrmMain
     PdfA = False
     PDFStandard = psNone
     PDFVersion = pv17
-    Left = 1043
-    Top = 125
+    Left = 995
+    Top = 101
   end
   object frxDBDsReport: TfrxDBDataset
     UserName = 'frxDBDsReport'

@@ -689,8 +689,8 @@ begin
 
   if (trim(cMes) <> '') AND (trim(cAno) <> '') then
   begin
-    QryTotaisDespesas.SQL.Add('   ,EXTRACT(MONTH FROM LD.DATAVENCIMENTO) AS MES, ');
-    QryTotaisDespesas.SQL.Add('    EXTRACT(YEAR FROM LD.DATAVENCIMENTO) AS ANO   ');
+    QryTotaisDespesas.SQL.Add('   ,MONTH(LD.DATAVENCIMENTO) AS MES, ');
+    QryTotaisDespesas.SQL.Add('    YEAR(LD.DATAVENCIMENTO) AS ANO   ');
   end;
 
   QryTotaisDespesas.SQL.Add('FROM LANCAMENTOSDESPESA LD                          ');
@@ -698,8 +698,8 @@ begin
 
   if (trim(cMes) <> '') AND (trim(cAno) <> '') then
   begin
-    QryTotaisDespesas.SQL.Add('  AND EXTRACT(MONTH FROM LD.DATAVENCIMENTO)=:PMes ');
-    QryTotaisDespesas.SQL.Add('  AND EXTRACT(YEAR FROM LD.DATAVENCIMENTO) =:PAno ');
+    QryTotaisDespesas.SQL.Add('  AND MONTH(LD.DATAVENCIMENTO)=:PMes ');
+    QryTotaisDespesas.SQL.Add('  AND YEAR(LD.DATAVENCIMENTO) =:PAno ');
   end;
 
   if nIdUsuario > 0 then
@@ -749,8 +749,8 @@ begin
 
   if (trim(cMes) <> '') AND (trim(cAno) <> '') then
   begin
-    QryTotaisReceitas.SQL.Add('   ,EXTRACT(MONTH FROM LR.DATARECEBIMENTO) AS MES, ');
-    QryTotaisReceitas.SQL.Add('    EXTRACT(YEAR FROM LR.DATARECEBIMENTO) AS ANO   ');
+    QryTotaisReceitas.SQL.Add('   ,MONTH(LR.DATARECEBIMENTO) AS MES, ');
+    QryTotaisReceitas.SQL.Add('    YEAR(LR.DATARECEBIMENTO) AS ANO   ');
   end;
 
   QryTotaisReceitas.SQL.Add('FROM LANCAMENTOSRECEITA LR                           ');
@@ -759,8 +759,8 @@ begin
 
   if (trim(cMes) <> '') AND (trim(cAno) <> '') then
   begin
-    QryTotaisReceitas.SQL.Add('  AND EXTRACT(MONTH FROM LR.DATARECEBIMENTO)=:PMes ');
-    QryTotaisReceitas.SQL.Add('  AND EXTRACT(YEAR FROM LR.DATARECEBIMENTO) =:PAno ');
+    QryTotaisReceitas.SQL.Add('  AND MONTH(LR.DATARECEBIMENTO)=:PMes ');
+    QryTotaisReceitas.SQL.Add('  AND YEAR(LR.DATARECEBIMENTO) =:PAno ');
   end;
 
   if nIdUsuario > 0 then
@@ -889,7 +889,7 @@ begin
 
   case rgMostrarDespesas.ItemIndex of
     //Somente Não Pagas
-    1: DM.qryDespesas.SQL.Add('  AND LD.VALORAPAGAR <> LD.VALORPAGO OR LD.VALORPAGO IS NULL ');
+    1: DM.qryDespesas.SQL.Add('  AND (LD.VALORAPAGAR <> LD.VALORPAGO OR LD.VALORPAGO IS NULL) ');
     //Somente Pagas
     2: DM.qryDespesas.SQL.Add('  AND LD.VALORAPAGAR = LD.VALORPAGO ');
   end;
