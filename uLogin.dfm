@@ -2831,7 +2831,6 @@ object frmLogin: TfrmLogin
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    OnKeyUp = edtUsuarioKeyUp
   end
   object edtSenha: TEdit
     Left = 376

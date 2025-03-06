@@ -273,7 +273,7 @@ begin
     DM.qryDespesas.Append;
 
     DM.qryDespesasDATAVENCIMENTO.Value  :=  Date();
-    DM.qryDespesasDATAPAGAMENTO.Value   :=  Date();
+//    DM.qryDespesasDATAPAGAMENTO.Value   :=  Date();
 
     edtDTVencimento.setFocus;
   end;
@@ -286,7 +286,7 @@ begin
     DM.qryReceitas.Append;
 
     DM.qryReceitasDATAARECEBER.Value    :=  Date();
-    DM.qryReceitasDATARECEBIMENTO.Value :=  Date();
+//    DM.qryReceitasDATARECEBIMENTO.Value :=  Date();
 
     edtDTAreceber.setFocus;
   end;
