@@ -84,13 +84,6 @@ type
     edtDTVencimento: TDBEdit;
     lblCategoriaDespesa: TLabel;
     lkpCategoriaDespesa: TDBLookupComboBox;
-    rgMostrarDespesas: TRadioGroup;
-    Label5: TLabel;
-    Label4: TLabel;
-    Shape3: TShape;
-    Shape2: TShape;
-    Label3: TLabel;
-    Shape1: TShape;
     btnImprimirDespesasDoMes: TBitBtn;
     lblTotalDespesas: TLabel;
     lblTotalReceitas: TLabel;
@@ -105,6 +98,15 @@ type
     lblDTAReceber: TLabel;
     edtDTAreceber: TDBEdit;
     lblPesquisa: TLabel;
+    rgMostrarDespesas: TRadioGroup;
+    Label5: TLabel;
+    Shape3: TShape;
+    Label4: TLabel;
+    Shape2: TShape;
+    Label3: TLabel;
+    Shape1: TShape;
+    lblObservacoesDespesas: TLabel;
+    edtObservacoesDespesas: TDBMemo;
     edtPesquisa: TEdit;
     procedure Despesas1Click(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
@@ -396,8 +398,24 @@ end;
 procedure TfrmMain.edtPesquisaChange(Sender: TObject);
 var
   cFiltro : String;
+  mesAno, cMes, cAno : String;
+
 begin
-  cFiltro := 'UPPER(DESCRICAO) LIKE ' + QuotedStr('%' + trim(UpperCase(edtPesquisa.Text)) + '%');
+	mesAno  := cboMesAno.Items[cboMesAno.ItemIndex];
+	cMes    := '';
+	cAno    := '';
+  cFiltro := '';
+
+	if UpperCase(mesAno) <> 'TODOS' then
+	begin
+	  cMes   := Copy(mesAno, 0, 2);
+	  cAno   := Copy(mesAno, 4, 6);
+
+//    cFiltro := ' MONTH(LD.DATAVENCIMENTO)=' + QuotedStr(cMes) + 'AND YEAR(LD.DATAVENCIMENTO=' + QuotedStr(cAno) + ' AND ';
+	end;
+
+
+  cFiltro := cFiltro + ' UPPER(DESCRICAO) LIKE ' + QuotedStr('%' + trim(UpperCase(edtPesquisa.Text)) + '%');
 
   dm.qryDespesas.Filtered := false;
   dm.qryDespesas.Filter   := cFiltro;
@@ -439,7 +457,7 @@ begin
   CarregaComboMesAno;
   FiltrarReceitasEDespesas(cMes, cAno);
 
-  btnImprimirDespesasDoMes.Caption := 'Im&primir' + Chr(13) + 'Despesas' + Chr(13) + 'do Mês';
+  btnImprimirDespesasDoMes.Caption := 'Im&primir' + Chr(13) + 'Despesas do Mês';
 end;
 
 procedure TfrmMain.grdDespesasDrawColumnCell(Sender: TObject;
@@ -632,19 +650,37 @@ end;
 
 procedure TfrmMain.cboMesAnoChange(Sender: TObject);
 var
-  mesAno, cMes, cAno : String;
+  mesAno, cMes, cAno, cFiltroDesp, cFiltroRec : String;
 begin
-	mesAno := cboMesAno.Items[cboMesAno.ItemIndex];
-	cMes   := '';
-	cAno   := '';
+	mesAno      :=  cboMesAno.Items[cboMesAno.ItemIndex];
+	cMes        :=  '';
+	cAno        :=  '';
+  cFiltroDesp :=  '';
+  cFiltroRec  :=  '';
 
 	if UpperCase(mesAno) <> 'TODOS' then
 	begin
 	  cMes   := Copy(mesAno, 0, 2);
 	  cAno   := Copy(mesAno, 4, 6);
-	end;
+  end;
 
   FiltrarReceitasEDespesas(cMes, cAno);
+
+{
+	if UpperCase(mesAno) <> 'TODOS' then
+	begin
+    cFiltroDesp := ' MONTH(LD.DATAVENCIMENTO)=' + QuotedStr(cMes) + ' AND YEAR(LD.DATAVENCIMENTO)=' + QuotedStr(cAno);
+    cFiltroRec  := ' MONTH(LR.DATARECEBIMENTO)=' + QuotedStr(cMes) + ' AND YEAR(LR.DATARECEBIMENTO)=' + QuotedStr(cAno);
+
+    dm.qryDespesas.Filtered := false;
+    dm.qryDespesas.Filter   := cFiltroDesp;
+    dm.qryDespesas.Filtered := true;
+
+    dm.qryReceitas.Filtered := false;
+    dm.qryReceitas.Filter   := cFiltroRec;
+    dm.qryReceitas.Filtered := true;
+	end;
+}
 end;
 
 procedure TfrmMain.chkMostrarDespesasJaPagasClick(Sender: TObject);
@@ -824,7 +860,8 @@ begin
   DM.qryReceitas.SQL.Add('       LR.IDCATEGORIA,                                ');
   DM.qryReceitas.SQL.Add('       CR.descricao as categoriaReceita,              ');
   DM.qryReceitas.SQL.Add('       LR.IDUSUARIO,                                  ');
-  DM.qryReceitas.SQL.Add('       LR.DATAARECEBER                                ');
+  DM.qryReceitas.SQL.Add('       LR.DATAARECEBER,                               ');
+  DM.qryReceitas.SQL.Add('       LR.OBSERVACOES                                 ');
   DM.qryReceitas.SQL.Add('FROM lancamentosReceita LR                            ');
   DM.qryReceitas.SQL.Add('INNER JOIN CATEGORIASReceita CR ON LR.idcategoria=CR.id ');
   DM.qryReceitas.SQL.Add('WHERE 1=1                                             ');
@@ -882,7 +919,8 @@ begin
   DM.qryDespesas.SQL.Add('       LD.IDCATEGORIA,                                  ');
   DM.qryDespesas.SQL.Add('       CD.DESCRICAO as categoriaDespesa,                ');
   DM.qryDespesas.SQL.Add('       LD.IDUSUARIO,                                    ');
-  DM.qryDespesas.SQL.Add('       LD.DATAPAGAMENTO                                 ');
+  DM.qryDespesas.SQL.Add('       LD.DATAPAGAMENTO,                                ');
+  DM.qryDespesas.SQL.Add('       LD.OBSERVACOES                                   ');
   DM.qryDespesas.SQL.Add('FROM lancamentosdespesa LD                              ');
   DM.qryDespesas.SQL.Add('INNER JOIN CATEGORIASDESPESA CD ON LD.idcategoria=CD.id ');
   DM.qryDespesas.SQL.Add('WHERE 1=1                                               ');

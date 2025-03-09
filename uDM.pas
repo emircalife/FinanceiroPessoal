@@ -66,6 +66,8 @@ type
     qryUsuariosSENHA: TStringField;
     qryUsuariosIDNIVEL: TIntegerField;
     qryUsuariosNIVELDEACESSO: TStringField;
+    qryDespesasOBSERVACOES: TStringField;
+    qryReceitasOBSERVACOES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

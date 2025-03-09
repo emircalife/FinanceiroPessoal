@@ -114,7 +114,8 @@ object DM: TDM
       '       ld.IDCATEGORIA,'
       '       cd.DESCRICAO as categoriaDespesa,'
       '       ld.IDUSUARIO,'
-      '       ld.DATAPAGAMENTO'
+      '       ld.DATAPAGAMENTO,'
+      '       ld.OBSERVACOES'
       'FROM lancamentosdespesa ld'
       'INNER JOIN CATEGORIASDESPESA cd ON ld.idcategoria = cd.id'
       'ORDER BY ld.DATAVENCIMENTO ')
@@ -185,6 +186,12 @@ object DM: TDM
       Origin = 'datapagamento'
       EditMask = '99/99/9999'
     end
+    object qryDespesasOBSERVACOES: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'OBSERVACOES'
+      Origin = 'observacoes'
+      Size = 255
+    end
   end
   object qryReceitas: TFDQuery
     Connection = Conn
@@ -200,7 +207,8 @@ object DM: TDM
       '       lr.IDCATEGORIA,'
       '       cr.DESCRICAO as categoriaReceita,'
       '       lr.IDUSUARIO,'
-      '       lr.DATAARECEBER'
+      '       lr.DATAARECEBER,'
+      '       lr.OBSERVACOES'
       'FROM lancamentosReceita lr'
       'INNER JOIN CATEGORIASReceita cr ON lr.idcategoria = cr.id'
       'ORDER BY lr.DATARECEBIMENTO')
@@ -273,6 +281,12 @@ object DM: TDM
       Origin = 'dataareceber'
       Required = True
       EditMask = '99/99/9999'
+    end
+    object qryReceitasOBSERVACOES: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'OBSERVACOES'
+      Origin = 'observacoes'
+      Size = 255
     end
   end
   object qryLogin: TFDQuery
