@@ -127,24 +127,24 @@ object frmMain: TfrmMain
       FocusControl = lkpCategoriaDespesa
     end
     object Label6: TLabel
-      Left = 676
-      Top = 239
+      Left = 784
+      Top = 229
       Width = 78
       Height = 15
       Caption = 'DT Pagamento'
       FocusControl = edtDTPagamento
     end
     object lblValorPago: TLabel
-      Left = 747
-      Top = 262
+      Left = 784
+      Top = 263
       Width = 43
       Height = 15
       Caption = 'R$ Pago'
       FocusControl = edtValorPago
     end
     object lblValorAPagar: TLabel
-      Left = 605
-      Top = 262
+      Left = 610
+      Top = 263
       Width = 55
       Height = 15
       Caption = 'R$ a Pagar'
@@ -267,8 +267,8 @@ object frmMain: TfrmMain
       TabOrder = 3
     end
     object edtDTPagamento: TDBEdit
-      Left = 771
-      Top = 234
+      Left = 873
+      Top = 226
       Width = 97
       Height = 23
       DataField = 'DATAPAGAMENTO'
@@ -276,18 +276,18 @@ object frmMain: TfrmMain
       TabOrder = 4
     end
     object edtValorPago: TDBEdit
-      Left = 796
-      Top = 259
-      Width = 72
+      Left = 873
+      Top = 255
+      Width = 97
       Height = 23
       DataField = 'VALORPAGO'
       DataSource = dsDesepsas
       TabOrder = 7
     end
     object edtValorAPagar: TDBEdit
-      Left = 666
-      Top = 259
-      Width = 74
+      Left = 682
+      Top = 255
+      Width = 97
       Height = 23
       DataField = 'VALORAPAGAR'
       DataSource = dsDesepsas
@@ -305,7 +305,7 @@ object frmMain: TfrmMain
     object edtObservacoesDespesas: TDBMemo
       Left = 97
       Top = 284
-      Width = 771
+      Width = 873
       Height = 43
       DataField = 'OBSERVACOES'
       DataSource = dsDesepsas
@@ -968,7 +968,7 @@ object frmMain: TfrmMain
       1127
       343)
     object lblDTRecebimento: TLabel
-      Left = 771
+      Left = 784
       Top = 157
       Width = 87
       Height = 15
@@ -1862,8 +1862,8 @@ object frmMain: TfrmMain
       end
     end
     object edtDTRecebimento: TDBEdit
-      Left = 868
-      Top = 154
+      Left = 873
+      Top = 151
       Width = 97
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -1905,7 +1905,7 @@ object frmMain: TfrmMain
       TabOrder = 5
     end
     object edtValorRecebido: TDBEdit
-      Left = 868
+      Left = 873
       Top = 180
       Width = 97
       Height = 23
@@ -1926,7 +1926,7 @@ object frmMain: TfrmMain
     object edtObservacoesReceitas: TDBMemo
       Left = 97
       Top = 209
-      Width = 868
+      Width = 873
       Height = 43
       DataField = 'OBSERVACOES'
       DataSource = dsReceitas
