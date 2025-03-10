@@ -12,7 +12,6 @@ type
     grdCategoriasDespesa: TDBGrid;
     dsCategoriasDespesa: TDataSource;
     lblCategoriaDespesa: TLabel;
-    edtCategoriaDespesa: TDBEdit;
     pnlBotoes: TPanel;
     btnNovo: TBitBtn;
     btnAlterar: TBitBtn;
@@ -22,6 +21,7 @@ type
     btnFechar: TBitBtn;
     lblPesquisa: TLabel;
     edtPesquisa: TEdit;
+    edtCategoriaDespesa: TDBEdit;
     procedure btnFecharClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);

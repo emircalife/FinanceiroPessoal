@@ -36,21 +36,23 @@ object frmMain: TfrmMain
     AlignWithMargins = True
     Left = 8
     Top = 45
-    Width = 1127
+    Width = 1123
     Height = 428
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = '   Despesas   '
     TabOrder = 3
+    ExplicitWidth = 1119
+    ExplicitHeight = 427
     DesignSize = (
-      1127
+      1123
       428)
     object lblTotalDespesas: TLabel
-      Left = 908
+      Left = 900
       Top = 192
       Width = 212
       Height = 15
       Alignment = taRightJustify
-      Anchors = [akLeft, akRight, akBottom]
+      Anchors = [akRight, akBottom]
       AutoSize = False
       Caption = 'Total de Registros: '
       Font.Charset = DEFAULT_CHARSET
@@ -90,6 +92,7 @@ object frmMain: TfrmMain
       Top = 192
       Width = 17
       Height = 17
+      Anchors = [akLeft, akBottom]
       Brush.Color = clOlive
       Pen.Color = clOlive
     end
@@ -115,6 +118,7 @@ object frmMain: TfrmMain
       Top = 239
       Width = 80
       Height = 15
+      Anchors = [akLeft, akBottom]
       Caption = 'DT Vencimento'
       FocusControl = edtDTVencimento
     end
@@ -123,6 +127,7 @@ object frmMain: TfrmMain
       Top = 239
       Width = 51
       Height = 15
+      Anchors = [akLeft, akBottom]
       Caption = 'Categoria'
       FocusControl = lkpCategoriaDespesa
     end
@@ -131,6 +136,7 @@ object frmMain: TfrmMain
       Top = 229
       Width = 78
       Height = 15
+      Anchors = [akLeft, akBottom]
       Caption = 'DT Pagamento'
       FocusControl = edtDTPagamento
     end
@@ -139,6 +145,7 @@ object frmMain: TfrmMain
       Top = 263
       Width = 43
       Height = 15
+      Anchors = [akLeft, akBottom]
       Caption = 'R$ Pago'
       FocusControl = edtValorPago
     end
@@ -147,6 +154,7 @@ object frmMain: TfrmMain
       Top = 263
       Width = 55
       Height = 15
+      Anchors = [akLeft, akBottom]
       Caption = 'R$ a Pagar'
       FocusControl = edtValorAPagar
     end
@@ -155,6 +163,7 @@ object frmMain: TfrmMain
       Top = 262
       Width = 43
       Height = 15
+      Anchors = [akLeft, akBottom]
       Caption = 'Despesa'
       FocusControl = edtDespesa
     end
@@ -163,16 +172,18 @@ object frmMain: TfrmMain
       Top = 287
       Width = 67
       Height = 15
+      Anchors = [akLeft, akBottom]
       Caption = 'Observa'#231#245'es'
       FocusControl = edtObservacoesDespesas
     end
     object grdDespesas: TDBGrid
       Left = 2
       Top = 17
-      Width = 1123
+      Width = 1119
       Height = 169
       TabStop = False
       Align = alTop
+      Anchors = [akLeft, akTop, akRight, akBottom]
       DataSource = dsDesepsas
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
       ReadOnly = True
@@ -231,7 +242,7 @@ object frmMain: TfrmMain
     end
     object rgMostrarDespesas: TRadioGroup
       Left = 262
-      Top = 192
+      Top = 191
       Width = 419
       Height = 36
       Anchors = [akLeft, akBottom]
@@ -250,6 +261,7 @@ object frmMain: TfrmMain
       Top = 234
       Width = 97
       Height = 23
+      Anchors = [akLeft, akBottom]
       DataField = 'DATAVENCIMENTO'
       DataSource = dsDesepsas
       TabOrder = 2
@@ -259,6 +271,7 @@ object frmMain: TfrmMain
       Top = 234
       Width = 333
       Height = 23
+      Anchors = [akLeft, akBottom]
       DataField = 'IDCATEGORIA'
       DataSource = dsDesepsas
       KeyField = 'ID'
@@ -271,6 +284,7 @@ object frmMain: TfrmMain
       Top = 226
       Width = 97
       Height = 23
+      Anchors = [akLeft, akBottom]
       DataField = 'DATAPAGAMENTO'
       DataSource = dsDesepsas
       TabOrder = 4
@@ -280,6 +294,7 @@ object frmMain: TfrmMain
       Top = 255
       Width = 97
       Height = 23
+      Anchors = [akLeft, akBottom]
       DataField = 'VALORPAGO'
       DataSource = dsDesepsas
       TabOrder = 7
@@ -289,6 +304,7 @@ object frmMain: TfrmMain
       Top = 255
       Width = 97
       Height = 23
+      Anchors = [akLeft, akBottom]
       DataField = 'VALORAPAGAR'
       DataSource = dsDesepsas
       TabOrder = 6
@@ -298,6 +314,7 @@ object frmMain: TfrmMain
       Top = 259
       Width = 500
       Height = 23
+      Anchors = [akLeft, akBottom]
       DataField = 'DESCRICAO'
       DataSource = dsDesepsas
       TabOrder = 5
@@ -307,6 +324,7 @@ object frmMain: TfrmMain
       Top = 284
       Width = 873
       Height = 43
+      Anchors = [akLeft, akBottom]
       DataField = 'OBSERVACOES'
       DataSource = dsDesepsas
       MaxLength = 255
@@ -316,12 +334,12 @@ object frmMain: TfrmMain
       AlignWithMargins = True
       Left = 5
       Top = 333
-      Width = 1117
+      Width = 1113
       Height = 90
       Align = alBottom
       TabOrder = 9
-      ExplicitLeft = 7
-      ExplicitTop = 335
+      ExplicitTop = 332
+      ExplicitWidth = 1109
       object btnNovoDespesa: TBitBtn
         AlignWithMargins = True
         Left = 4
@@ -959,13 +977,15 @@ object frmMain: TfrmMain
     AlignWithMargins = True
     Left = 8
     Top = 479
-    Width = 1127
+    Width = 1123
     Height = 343
     Anchors = [akLeft, akRight, akBottom]
     Caption = '   Receitas   '
     TabOrder = 4
+    ExplicitTop = 478
+    ExplicitWidth = 1119
     DesignSize = (
-      1127
+      1123
       343)
     object lblDTRecebimento: TLabel
       Left = 784
@@ -1013,10 +1033,10 @@ object frmMain: TfrmMain
       FocusControl = edtValorRecebido
     end
     object lblTotalReceitas: TLabel
-      Left = 904
-      Top = 135
+      Left = 900
+      Top = 132
       Width = 212
-      Height = 72
+      Height = 16
       Alignment = taRightJustify
       Anchors = [akLeft, akTop, akRight, akBottom]
       AutoSize = False
@@ -1027,8 +1047,6 @@ object frmMain: TfrmMain
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 205
-      ExplicitHeight = 18
     end
     object lblDTAReceber: TLabel
       Left = 6
@@ -1049,7 +1067,7 @@ object frmMain: TfrmMain
     object grdReceitas: TDBGrid
       Left = 2
       Top = 17
-      Width = 1123
+      Width = 1119
       Height = 112
       TabStop = False
       Align = alTop
@@ -1112,11 +1130,11 @@ object frmMain: TfrmMain
     object pnlBotoesReceitas: TPanel
       Left = 2
       Top = 263
-      Width = 1123
+      Width = 1119
       Height = 78
       Align = alBottom
       TabOrder = 8
-      ExplicitTop = 258
+      ExplicitWidth = 1115
       object btnNovoReceita: TBitBtn
         AlignWithMargins = True
         Left = 4
@@ -1676,7 +1694,7 @@ object frmMain: TfrmMain
       end
       object btnSair: TBitBtn
         AlignWithMargins = True
-        Left = 1019
+        Left = 1015
         Top = 4
         Width = 100
         Height = 70
@@ -1784,7 +1802,7 @@ object frmMain: TfrmMain
         Layout = blGlyphTop
         TabOrder = 5
         OnClick = btnSairClick
-        ExplicitLeft = 996
+        ExplicitLeft = 1011
       end
       object grpTotaisReceitas: TGroupBox
         Left = 558
@@ -1944,7 +1962,7 @@ object frmMain: TfrmMain
     OnChange = cboMesAnoChange
   end
   object btnCalendario: TBitBtn
-    Left = 1035
+    Left = 1031
     Top = 8
     Width = 100
     Height = 31
@@ -1952,6 +1970,7 @@ object frmMain: TfrmMain
     Caption = '&Calend'#225'rio'
     TabOrder = 2
     OnClick = btnCalendarioClick
+    ExplicitLeft = 1027
   end
   object edtPesquisa: TEdit
     Left = 220

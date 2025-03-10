@@ -36,7 +36,7 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
   object grdCategoriasDespesa: TDBGrid
     Left = 0
     Top = 40
-    Width = 913
+    Width = 909
     Height = 345
     Anchors = [akLeft, akTop, akRight]
     DataSource = dsCategoriasDespesa
@@ -63,22 +63,13 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
         Visible = True
       end>
   end
-  object edtCategoriaDespesa: TDBEdit
-    Left = 143
-    Top = 405
-    Width = 762
-    Height = 23
-    DataField = 'DESCRICAO'
-    DataSource = dsCategoriasDespesa
-    TabOrder = 1
-  end
   object pnlBotoes: TPanel
     Left = 0
     Top = 456
     Width = 929
     Height = 62
     Align = alBottom
-    TabOrder = 2
+    TabOrder = 1
     ExplicitTop = 455
     ExplicitWidth = 925
     object btnNovo: TBitBtn
@@ -156,8 +147,17 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
     Top = 8
     Width = 650
     Height = 23
-    TabOrder = 3
+    TabOrder = 2
     OnChange = edtPesquisaChange
+  end
+  object edtCategoriaDespesa: TDBEdit
+    Left = 143
+    Top = 405
+    Width = 762
+    Height = 23
+    DataField = 'DESCRICAO'
+    DataSource = dsCategoriasDespesa
+    TabOrder = 3
   end
   object dsCategoriasDespesa: TDataSource
     DataSet = DM.qryCategoriasDespesa
