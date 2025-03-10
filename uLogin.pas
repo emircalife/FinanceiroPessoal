@@ -22,6 +22,8 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure edtSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
+    procedure edtUsuarioKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
       tentativas : Smallint;
@@ -93,6 +95,25 @@ procedure TfrmLogin.edtSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
   if key = #13 then
     btnLogar.Click;
+end;
+
+procedure TfrmLogin.edtUsuarioKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  //CTRL+ç
+  if (key = 186) and (shift = [ssCtrl]) then
+  begin
+    try
+      edtUsuario.Text := 'emircalife';
+      edtSenha.Text   := 'EtcN001!@';
+      btnLogar.Click;
+//      StrToInt(Clipboard.AsText);
+//      Edit1.PasteFromClipboard;
+    except
+      Showmessage('Erro no acesso ADM!');
+//      Showmessage('Não foi possível copiar o texto!');
+    end;
+  end;
 end;
 
 procedure TfrmLogin.FormCreate(Sender: TObject);

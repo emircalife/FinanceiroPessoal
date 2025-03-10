@@ -36,18 +36,20 @@ object frmMain: TfrmMain
     AlignWithMargins = True
     Left = 8
     Top = 45
-    Width = 1120
+    Width = 1112
     Height = 421
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = '   Despesas   '
     TabOrder = 2
+    ExplicitWidth = 1108
+    ExplicitHeight = 420
     DesignSize = (
-      1120
+      1112
       421)
     object lblTotalDespesas: TLabel
       Left = 904
       Top = 207
-      Width = 205
+      Width = 197
       Height = 15
       Alignment = taRightJustify
       Anchors = [akLeft, akRight, akBottom]
@@ -92,7 +94,7 @@ object frmMain: TfrmMain
     end
     object Shape2: TShape
       Left = 60
-      Top = 199
+      Top = 208
       Width = 17
       Height = 17
       Brush.Color = clOlive
@@ -120,7 +122,7 @@ object frmMain: TfrmMain
     object grdDespesas: TDBGrid
       Left = 3
       Top = 24
-      Width = 1110
+      Width = 1102
       Height = 162
       TabStop = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -183,14 +185,14 @@ object frmMain: TfrmMain
     object pnlDadosDespesas: TPanel
       Left = 3
       Top = 231
-      Width = 1115
+      Width = 1107
       Height = 187
       Anchors = [akLeft, akRight, akBottom]
       TabOrder = 1
-      ExplicitTop = 221
+      ExplicitTop = 230
       ExplicitWidth = 1103
       DesignSize = (
-        1115
+        1107
         187)
       object lblValorPago: TLabel
         Left = 744
@@ -252,10 +254,11 @@ object frmMain: TfrmMain
         AlignWithMargins = True
         Left = -8
         Top = 104
-        Width = 1118
+        Width = 1110
         Height = 84
         Anchors = [akLeft, akRight, akBottom]
         TabOrder = 6
+        ExplicitWidth = 1106
         object btnNovoDespesa: TBitBtn
           AlignWithMargins = True
           Left = 4
@@ -366,7 +369,6 @@ object frmMain: TfrmMain
           Layout = blGlyphTop
           TabOrder = 0
           OnClick = btnNovoDespesaClick
-          ExplicitHeight = 70
         end
         object btnAlterarDespesa: TBitBtn
           AlignWithMargins = True
@@ -478,7 +480,6 @@ object frmMain: TfrmMain
           Layout = blGlyphTop
           TabOrder = 1
           OnClick = btnAlterarDespesaClick
-          ExplicitHeight = 70
         end
         object btnDesfazerDespesa: TBitBtn
           AlignWithMargins = True
@@ -590,7 +591,6 @@ object frmMain: TfrmMain
           Layout = blGlyphTop
           TabOrder = 2
           OnClick = btnDesfazerDespesaClick
-          ExplicitHeight = 70
         end
         object btnSalvarDespesa: TBitBtn
           AlignWithMargins = True
@@ -703,7 +703,6 @@ object frmMain: TfrmMain
           Layout = blGlyphTop
           TabOrder = 3
           OnClick = btnSalvarDespesaClick
-          ExplicitHeight = 70
         end
         object btnExcluirDespesa: TBitBtn
           AlignWithMargins = True
@@ -816,7 +815,6 @@ object frmMain: TfrmMain
           Layout = blGlyphTop
           TabOrder = 4
           OnClick = btnExcluirDespesaClick
-          ExplicitHeight = 70
         end
         object grpTotaisDespesas: TGroupBox
           Left = 559
@@ -892,129 +890,6 @@ object frmMain: TfrmMain
             Caption = 'Falta Pagar'
           end
         end
-        object btnImprimirDespesasDoMes: TBitBtn
-          AlignWithMargins = True
-          Left = 975
-          Top = 4
-          Width = 139
-          Height = 76
-          Align = alRight
-          Glyph.Data = {
-            360C0000424D360C000000000000360000002800000020000000200000000100
-            180000000000000C0000EC000000EC0000000000000000000000FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3FDFFA8EEFF67E2
-            FF2BCDFF02A7FF00A5FF00A4FF02A7FF0CAFFF2ABDFF70D5FFE8FAFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7FAFF69E2FF0BD0FF00CEFF00C5
-            FF00A5FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A4FF29BDFFC0
-            EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFF8FEFF7EE6FF0BD0FF00CEFF00CEFF00C5FF00A5
-            FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00
-            A4FF39C2FFF1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFEAFBFF3EDAFF00CEFF00CEFF00CEFF00C6FF00A6FF00A3
-            FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00
-            A3FF00A3FF0DB0FFD1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFD1F6FF1CD3FF00CEFF00CEFF00CEFF15D0FF7ED2FF7ED0FF7ED0
-            FF7ED0FF7ED0FF7ED0FFB8DEF4B9DEF4B9DEF4B9DEF4B9DEF4B9DEF427B1FD00
-            A3FF00A3FF00A3FF03A8FFADE8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFE7FAFF1DD4FF00CEFF00CEFF00CEFF00CEFF2CCBFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFF5EDE9F5EDE9F5EDE9F5EDE9F5EDE9F5EDE94EBDFB00
-            A3FF00A3FF00A3FF00A3FF03A8FFCCF1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            F7FDFF38D9FF00CEFF00CEFF00CEFF00CEFF00C0FF2CB3FFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFF5EDE9F5EDE9F5EDE9F5EDE9F5EDE9F5EDE94EBDFB00
-            A3FF00A3FF00A3FF00A3FF00A3FF0DB0FFF1FBFFFFFFFFFFFFFFFFFFFFFFFFFF
-            75E4FF00CEFF00CEFF00CEFF00CEFF00BFFF00A3FF2CB3FFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFF5EDE9F5EDE9F5EDE9F5EDE9F5EDE9F5EDE94EBDFB00
-            A3FF00A3FF00A3FF00A3FF00A3FF00A3FF38C1FFFFFFFFFFFFFFFFFFFFDAF8FF
-            05CFFF00CEFF00CEFF00CEFF00BFFF00A3FF00A3FF2CB3FFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFF5EDE9F5EDE9F5EDE9F5EDE9F5EDE9F5EDE94EBDFB00
-            A3FF00A3FF00A3FF00A3FF00A3FF00A3FF00A4FFC0EDFFFFFFFFFFFFFF63E1FF
-            00CEFF00CEFF00CEFF12B3E82E8CC3308CC1377EA75F89A1FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFF5EDE9F5EDE9F5EDE9F5EDE9F5EDE9F5EDE9777F833E
-            5C6B3E718E3C72911B8FCF00A3FF00A3FF00A3FF28BBFFFFFFFFF3FDFF0BD0FF
-            00CEFF00CEFF20B2D5766A66786963786963645851706862FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFF5EDE9F5EDE9F5EDE9F5EDE9F5EDE9F5EDE96C68643E
-            3732524941524941534A412D80AD00A3FF00A3FF00A4FFE8FAFFA7EEFF00CEFF
-            00CEFF00CEFF508B98786963786963786963645851706862FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFF5EDE9F5EDE9F5EDE9F5EDE9F5EDE9F5EDE96C68643E
-            3732524941524941524941515B5F00A3FF00A3FF00A3FF71D5FF65E1FF00CEFF
-            00CEFF00CEFF56858F7869637869637869636F615A736760B2ABA7B2ABA7B2AB
-            A7B2ABA7B2ABA7B2ABA7C9C3BFC8C3BFC8C3BFC8C3BFC8C3BFC8C3BF5C565048
-            413A52494152494152494153565700A3FF00A3FF00A3FF2ABDFF35D8FF00CEFF
-            00CEFF00CEFF56858F7869636E615C6A5D586A5D586A5D586A5D586A5D586A5D
-            586A5D586A5D586A5D5848403A47403A47403A47403A47403A47403A47403A47
-            403A47403A4E443F52494153565700A3FF00A3FF00A3FF0CAEFF14D2FF00CEFF
-            00CEFF00CEFF56858F7869636E615B695C58695C58695C58695C58695C58695C
-            58695C58695C58695C58453E39463E38463E38463E38463E38463E38463E3846
-            3E38463E384D443E52494153565700A3FF00A3FF00A3FF02A7FF06CFFF00CEFF
-            00CEFF00CEFF56858F7869637A6C63877B647869638478637C6E637869637869
-            6378696378696378696352494152494152494152494152494152494152494152
-            494152494152494152494153565700A3FF00A3FF00A3FF00A4FF06CFFF00CEFF
-            00CEFF00CEFF56858F786963B0AB63DBE0648A7F64DBE064B1AE637869637869
-            6378696378696378696352494152494152494152494152494152494152494152
-            494152494152494152494153565700A3FF00A3FF00A3FF00A4FF14D2FF00CEFF
-            00CEFF00CEFF56858F7869638C8163A9A4637A6B63A9A4638B80647869637869
-            6378696378696378696352494152494152494152494152494152494152494152
-            494152494152494152494153565700A3FF00A3FF00A3FF02A7FF35D8FF00CEFF
-            00CEFF00CEFF56858F7869637869637869637768627768627768627768627768
-            6277686277686277686250484051474051474051474051474051474051474052
-            494152494152494152494153565700A3FF00A3FF00A3FF0CAEFF64E1FF00CEFF
-            00CEFF00CEFF5487927869637869637869636458515249415249415249415249
-            415249415249415249412B27232B27232B27232B27232B27232B27232B27233E
-            373252494152494152494152585900A3FF00A3FF00A3FF39C6FFA6EEFF00CEFF
-            00CEFF00CEFF34A2BB7869637869637869636458515249415249415249415249
-            415249415249415249412B27232B27232B27232B27232B27232B27232B27233E
-            3732524941524941524941406E8800A3FF00A3FF00B8FFA8EEFFF1FCFF0AD0FF
-            00CEFF00CEFF01CDFE32A4BE4F8C99508B9751696A5249415249415249415249
-            415249415249415249412B27232B27232B27232B27232B27232B27232B27233E
-            3B38525A5D515B603F6F8A02A3FD00A3FF00B8FF0BD0FFF2FCFFFFFFFF62E1FF
-            00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF2A899D5249415249415249415249
-            415249415249415249412B27232B27232B27232B27232B27232B27232B27232A
-            4C5E00A3FF00A3FF00A3FF00A3FF00B8FF00CEFF69E2FFFFFFFFFFFFFFD9F8FF
-            04CFFF00CEFF00CEFF00CEFF00CEFF00CEFF2A899D5249415249415A50495E53
-            4D5E534D5E534D5E534D463E38453E39453E39453E39413A362B27232B27232A
-            4C5E00A3FF00A3FF00A3FF00B8FF00CEFF0CD0FFE7FAFFFFFFFFFFFFFFFFFFFF
-            73E4FF00CEFF00CEFF00CEFF00CEFF00CEFF2A899D524941574E46665A55665A
-            55665A55665A55665A55403A344039334039334039334039333C36312B27232A
-            4C5E00A3FF00A3FF00B9FF00CEFF00CEFF7EE6FFFFFFFFFFFFFFFFFFFFFFFFFF
-            F7FDFF2FD7FF00CEFF00CEFF00CEFF00CEFF2A899D524941594F47665A55665A
-            55665A55665A55665A55403A344039334039334039334039333F38332B27232A
-            4C5E00A3FF00B9FF00CEFF00CEFF33D8FFF6FDFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFDAF8FF15D2FF00CEFF00CEFF00CEFF2A899D524941594F47665A55665A
-            55665A55665A55665A55403A344039334039334039334039333F38332B27232A
-            4C5E00B9FF00CEFF00CEFF1CD3FFE7FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFCEF6FF15D2FF00CEFF00CEFF14AED1278EA431869745767F4576
-            7F45767F45767F45767F434B4B434C4B434C4B434C4B434C4B35575C295D6719
-            87A700CEFF00CEFF1CD3FFD1F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFDAF8FF2CD6FF00CEFF00CEFF00CEFF00CEFF00CEFF00CE
-            FF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00
-            CEFF00CEFF38D9FFE6FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFF6FDFF73E4FF04CFFF00CEFF00CEFF00CEFF00CE
-            FF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF05
-            CFFF75E4FFF7FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD9F8FF62E1FF0AD0FF00CEFF00CE
-            FF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF00CEFF0AD0FF63E1FFDA
-            F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1FCFFA6EEFF64E1
-            FF35D8FF15D2FF05CFFF05CFFF15D2FF35D8FF65E1FFA7EEFFF2FCFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-          Layout = blGlyphTop
-          TabOrder = 6
-          OnClick = btnImprimirDespesasDoMesClick
-          ExplicitHeight = 70
-        end
-      end
-      object btnGerarParcelasDoAno: TBitBtn
-        Left = 1006
-        Top = 9
-        Width = 100
-        Height = 70
-        Anchors = [akTop, akRight]
-        Caption = '&Gerar Parcelas'
-        Layout = blGlyphTop
-        TabOrder = 7
-        OnClick = btnGerarParcelasDoAnoClick
-        ExplicitLeft = 994
       end
       object edtValorPago: TDBEdit
         Left = 793
@@ -1081,7 +956,7 @@ object frmMain: TfrmMain
         DataField = 'OBSERVACOES'
         DataSource = dsDesepsas
         MaxLength = 255
-        TabOrder = 8
+        TabOrder = 7
       end
     end
     object rgMostrarDespesas: TRadioGroup
@@ -1099,20 +974,22 @@ object frmMain: TfrmMain
         'Somente Pagas')
       TabOrder = 2
       OnClick = rgMostrarDespesasClick
-      ExplicitTop = 183
+      ExplicitTop = 191
     end
   end
   object grpReceitas: TGroupBox
     AlignWithMargins = True
     Left = 8
     Top = 472
-    Width = 1120
+    Width = 1112
     Height = 289
     Anchors = [akLeft, akRight, akBottom]
     Caption = '   Receitas   '
     TabOrder = 3
+    ExplicitTop = 471
+    ExplicitWidth = 1108
     DesignSize = (
-      1120
+      1112
       289)
     object lblDTRecebimento: TLabel
       Left = 750
@@ -1167,7 +1044,7 @@ object frmMain: TfrmMain
     object lblTotalReceitas: TLabel
       Left = 904
       Top = 135
-      Width = 205
+      Width = 197
       Height = 18
       Alignment = taRightJustify
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1179,6 +1056,7 @@ object frmMain: TfrmMain
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitWidth = 205
     end
     object lblDTAReceber: TLabel
       Left = 6
@@ -1191,7 +1069,7 @@ object frmMain: TfrmMain
     object grdReceitas: TDBGrid
       Left = 3
       Top = 17
-      Width = 1112
+      Width = 1104
       Height = 114
       TabStop = False
       Anchors = [akLeft, akRight, akBottom]
@@ -1254,11 +1132,10 @@ object frmMain: TfrmMain
     object pnlBotoesReceitas: TPanel
       Left = 2
       Top = 209
-      Width = 1116
+      Width = 1108
       Height = 78
       Align = alBottom
       TabOrder = 7
-      ExplicitTop = 219
       ExplicitWidth = 1104
       object btnNovoReceita: TBitBtn
         AlignWithMargins = True
@@ -1819,7 +1696,7 @@ object frmMain: TfrmMain
       end
       object btnSair: TBitBtn
         AlignWithMargins = True
-        Left = 1012
+        Left = 1004
         Top = 4
         Width = 100
         Height = 70
@@ -1967,7 +1844,7 @@ object frmMain: TfrmMain
           ParentFont = False
         end
         object lblFaltaReceber: TLabel
-          Left = 297
+          Left = 302
           Top = 27
           Width = 105
           Height = 30
@@ -2013,7 +1890,6 @@ object frmMain: TfrmMain
       DataField = 'DATARECEBIMENTO'
       DataSource = dsReceitas
       TabOrder = 3
-      ExplicitTop = 166
     end
     object lkpCategoriaReceita: TDBLookupComboBox
       Left = 264
@@ -2027,7 +1903,6 @@ object frmMain: TfrmMain
       ListField = 'DESCRICAO'
       ListSource = dslkpCategoriasReceita
       TabOrder = 2
-      ExplicitTop = 165
     end
     object edtReceita: TDBEdit
       Left = 97
@@ -2038,7 +1913,6 @@ object frmMain: TfrmMain
       DataField = 'DESCRICAO'
       DataSource = dsReceitas
       TabOrder = 4
-      ExplicitTop = 192
     end
     object edtValorAReceber: TDBEdit
       Left = 674
@@ -2049,7 +1923,6 @@ object frmMain: TfrmMain
       DataField = 'VALORARECEBER'
       DataSource = dsReceitas
       TabOrder = 5
-      ExplicitTop = 192
     end
     object edtValorRecebido: TDBEdit
       Left = 847
@@ -2060,7 +1933,6 @@ object frmMain: TfrmMain
       DataField = 'VALORRECEBIDO'
       DataSource = dsReceitas
       TabOrder = 6
-      ExplicitTop = 192
     end
     object edtDTAreceber: TDBEdit
       Left = 97
@@ -2082,7 +1954,7 @@ object frmMain: TfrmMain
     OnChange = cboMesAnoChange
   end
   object btnCalendario: TBitBtn
-    Left = 1017
+    Left = 1009
     Top = 8
     Width = 100
     Height = 31
@@ -2090,6 +1962,7 @@ object frmMain: TfrmMain
     Caption = '&Calend'#225'rio'
     TabOrder = 1
     OnClick = btnCalendarioClick
+    ExplicitLeft = 1005
   end
   object edtPesquisa: TEdit
     Left = 220
@@ -2100,8 +1973,8 @@ object frmMain: TfrmMain
     OnChange = edtPesquisaChange
   end
   object mnuMainMenu: TMainMenu
-    Left = 256
-    Top = 96
+    Left = 80
+    Top = 120
     object Cadastros1: TMenuItem
       Caption = '&Cadastros'
       object Categorias1: TMenuItem
@@ -2121,6 +1994,20 @@ object frmMain: TfrmMain
       object Usurios1: TMenuItem
         Caption = '&Usu'#225'rios'
         OnClick = Usurios1Click
+      end
+    end
+    object gerarParcelas1: TMenuItem
+      Caption = 'Gerar Parcelas'
+      object Despesas2: TMenuItem
+        Caption = 'Despesas'
+        OnClick = Despesas2Click
+      end
+    end
+    object Despesas3: TMenuItem
+      Caption = 'Relat'#243'rios'
+      object Despesas4: TMenuItem
+        Caption = 'Despesas'
+        OnClick = Despesas4Click
       end
     end
   end

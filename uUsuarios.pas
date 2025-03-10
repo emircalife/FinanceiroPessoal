@@ -22,9 +22,7 @@ type
     grdUsuarios: TDBGrid;
     dsUsuarios: TDataSource;
     lblUsuario: TLabel;
-    edtUsuario: TDBEdit;
     lblSenha: TLabel;
-    edtSenha: TDBEdit;
     lblNivelDeAcesso: TLabel;
     lkpNivelDeAcesso: TDBLookupComboBox;
     qrylkpUsuarios: TFDQuery;
@@ -33,6 +31,8 @@ type
     qrylkpUsuariosDESCRICAO: TStringField;
     lblPesquisa: TLabel;
     edtPesquisa: TEdit;
+    edtSenha: TDBEdit;
+    edtUsuario: TDBEdit;
     procedure btnSairClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -106,9 +106,6 @@ begin
       edtSenha.SetFocus;
       exit;
     end;
-
-    if DM.qryUsuarios.State = dsInsert then
-//      DM.qryUsuariosID.Value := DM.getNextId('USUARIOS');
 
     cSenha := uFuncoes.Criptografar(AnsiUpperCase(trim(DM.qryUsuariosSENHA.value)));
     DM.qryUsuariosSENHA.value := cSenha;

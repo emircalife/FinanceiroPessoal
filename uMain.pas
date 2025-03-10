@@ -73,7 +73,6 @@ type
     lblDepesaAPagar: TLabel;
     lblDepesaPaga: TLabel;
     lblFaltaPagar: TLabel;
-    btnGerarParcelasDoAno: TBitBtn;
     edtValorPago: TDBEdit;
     lblValorPago: TLabel;
     edtValorAPagar: TDBEdit;
@@ -84,7 +83,6 @@ type
     edtDTVencimento: TDBEdit;
     lblCategoriaDespesa: TLabel;
     lkpCategoriaDespesa: TDBLookupComboBox;
-    btnImprimirDespesasDoMes: TBitBtn;
     lblTotalDespesas: TLabel;
     lblTotalReceitas: TLabel;
     lblTotalAPagar: TLabel;
@@ -108,6 +106,10 @@ type
     lblObservacoesDespesas: TLabel;
     edtObservacoesDespesas: TDBMemo;
     edtPesquisa: TEdit;
+    gerarParcelas1: TMenuItem;
+    Despesas2: TMenuItem;
+    Despesas3: TMenuItem;
+    Despesas4: TMenuItem;
     procedure Despesas1Click(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure Receitas1Click(Sender: TObject);
@@ -126,9 +128,7 @@ type
     procedure cboMesAnoChange(Sender: TObject);
     procedure grdDespesasDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure btnGerarParcelasDoAnoClick(Sender: TObject);
     procedure btnCalendarioClick(Sender: TObject);
-    procedure btnImprimirDespesasDoMesClick(Sender: TObject);
     procedure Usurios1Click(Sender: TObject);
     procedure chkMostrarDespesasJaPagasClick(Sender: TObject);
     procedure rgMostrarDespesasClick(Sender: TObject);
@@ -139,6 +139,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure grdReceitasDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure Despesas2Click(Sender: TObject);
+    procedure Despesas4Click(Sender: TObject);
   private
     { Private declarations }
     procedure CarregaComboMesAno;
@@ -229,45 +231,6 @@ begin
     end;
 end;
 
-procedure TfrmMain.btnGerarParcelasDoAnoClick(Sender: TObject);
-var
-  cMesAno, cMes, cAno : String;
-begin
-  cMesAno := cboMesAno.Items[cboMesAno.ItemIndex];
-  cMes   := '';
-  cAno   := '';
-
-  if trim(UpperCase(cMesAno)) <> 'TODOS' then
-  begin
-    cMes    :=  Copy(cMesAno, 0, 2);
-    cAno    :=  Copy(cMesAno, 4, 6);
-  end;
-
-  frmGeracaoParcelas := TfrmGeracaoParcelas.Create(self);
-  frmGeracaoParcelas.nIdUsuario   := nIdUsuario;
-  frmGeracaoParcelas.cNomeUsuario := cNomeUsuario;
-
-  frmGeracaoParcelas.ShowModal;
-  FreeAndNil(frmGeracaoParcelas);
-
-  CarregaComboMesAno;
-
-  cboMesAno.ItemIndex := cboMesAno.Items.IndexOf(cMesAno);
-
-  FiltrarReceitasEDespesas('','');
-end;
-
-procedure TfrmMain.btnImprimirDespesasDoMesClick(Sender: TObject);
-
-begin
-  frmImprDespesas :=  TfrmImprDespesas.Create(self);
-  frmImprDespesas.nIdUsuario    := nIdUsuario;
-  frmImprDespesas.cNomeUsuario  := cNomeUsuario;
-
-  frmImprDespesas.ShowModal;
-  FreeAndNil(frmImprDespesas);
-end;
-
 procedure TfrmMain.btnNovoDespesaClick(Sender: TObject);
 begin
   if DM.qryDespesas.State in [dsInactive, dsBrowse] then
@@ -275,7 +238,6 @@ begin
     DM.qryDespesas.Append;
 
     DM.qryDespesasDATAVENCIMENTO.Value  :=  Date();
-//    DM.qryDespesasDATAPAGAMENTO.Value   :=  Date();
 
     edtDTVencimento.setFocus;
   end;
@@ -288,7 +250,6 @@ begin
     DM.qryReceitas.Append;
 
     DM.qryReceitasDATAARECEBER.Value    :=  Date();
-//    DM.qryReceitasDATARECEBIMENTO.Value :=  Date();
 
     edtDTAreceber.setFocus;
   end;
@@ -395,6 +356,44 @@ begin
   qrylkpCategoriasDespesa.Refresh;
 end;
 
+procedure TfrmMain.Despesas2Click(Sender: TObject);
+var
+  cMesAno, cMes, cAno : String;
+begin
+  cMesAno := cboMesAno.Items[cboMesAno.ItemIndex];
+  cMes   := '';
+  cAno   := '';
+
+  if trim(UpperCase(cMesAno)) <> 'TODOS' then
+  begin
+    cMes    :=  Copy(cMesAno, 0, 2);
+    cAno    :=  Copy(cMesAno, 4, 6);
+  end;
+
+  frmGeracaoParcelas := TfrmGeracaoParcelas.Create(self);
+  frmGeracaoParcelas.nIdUsuario   := nIdUsuario;
+  frmGeracaoParcelas.cNomeUsuario := cNomeUsuario;
+
+  frmGeracaoParcelas.ShowModal;
+  FreeAndNil(frmGeracaoParcelas);
+
+  CarregaComboMesAno;
+
+  cboMesAno.ItemIndex := cboMesAno.Items.IndexOf(cMesAno);
+
+  FiltrarReceitasEDespesas('','');
+end;
+
+procedure TfrmMain.Despesas4Click(Sender: TObject);
+begin
+  frmImprDespesas :=  TfrmImprDespesas.Create(self);
+  frmImprDespesas.nIdUsuario    := nIdUsuario;
+  frmImprDespesas.cNomeUsuario  := cNomeUsuario;
+
+  frmImprDespesas.ShowModal;
+  FreeAndNil(frmImprDespesas);
+end;
+
 procedure TfrmMain.edtPesquisaChange(Sender: TObject);
 var
   cFiltro : String;
@@ -456,8 +455,6 @@ begin
 
   CarregaComboMesAno;
   FiltrarReceitasEDespesas(cMes, cAno);
-
-  btnImprimirDespesasDoMes.Caption := 'Im&primir' + Chr(13) + 'Despesas do Mês';
 end;
 
 procedure TfrmMain.grdDespesasDrawColumnCell(Sender: TObject;
@@ -970,7 +967,9 @@ begin
     cMes   := '';
     cAno   := '';
 
-    if UpperCase(mesAno) <> 'TODOS' then
+    if (UpperCase(mesAno) <> 'TODOS') AND
+       (trim(cMesAtual) = '') AND
+       (trim(cAnoAtual) = '') then
     begin
       cMes   := Copy(mesAno, 0, 2);
       cAno   := Copy(mesAno, 4, 6);

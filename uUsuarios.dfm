@@ -25,7 +25,6 @@ object frmUsuarios: TfrmUsuarios
     Width = 40
     Height = 15
     Caption = 'Usu'#225'rio'
-    FocusControl = edtUsuario
   end
   object lblSenha: TLabel
     Left = 342
@@ -33,7 +32,6 @@ object frmUsuarios: TfrmUsuarios
     Width = 32
     Height = 15
     Caption = 'Senha'
-    FocusControl = edtSenha
   end
   object lblNivelDeAcesso: TLabel
     Left = 670
@@ -132,7 +130,7 @@ object frmUsuarios: TfrmUsuarios
   object grdUsuarios: TDBGrid
     Left = 0
     Top = 40
-    Width = 913
+    Width = 909
     Height = 345
     Anchors = [akLeft, akTop, akRight]
     DataSource = dsUsuarios
@@ -166,14 +164,25 @@ object frmUsuarios: TfrmUsuarios
         Visible = True
       end>
   end
-  object edtUsuario: TDBEdit
-    Left = 56
+  object lkpNivelDeAcesso: TDBLookupComboBox
+    Left = 759
     Top = 408
-    Width = 280
+    Width = 162
     Height = 23
-    DataField = 'LOGIN'
+    DataField = 'IDNIVEL'
     DataSource = dsUsuarios
+    KeyField = 'ID'
+    ListField = 'DESCRICAO'
+    ListSource = dslkpUsuarios
     TabOrder = 3
+  end
+  object edtPesquisa: TEdit
+    Left = 63
+    Top = 8
+    Width = 650
+    Height = 23
+    TabOrder = 0
+    OnChange = edtPesquisaChange
   end
   object edtSenha: TDBEdit
     Left = 380
@@ -185,25 +194,14 @@ object frmUsuarios: TfrmUsuarios
     PasswordChar = '*'
     TabOrder = 4
   end
-  object lkpNivelDeAcesso: TDBLookupComboBox
-    Left = 759
+  object edtUsuario: TDBEdit
+    Left = 56
     Top = 408
-    Width = 162
+    Width = 280
     Height = 23
-    DataField = 'IDNIVEL'
+    DataField = 'LOGIN'
     DataSource = dsUsuarios
-    KeyField = 'ID'
-    ListField = 'DESCRICAO'
-    ListSource = dslkpUsuarios
     TabOrder = 5
-  end
-  object edtPesquisa: TEdit
-    Left = 63
-    Top = 8
-    Width = 650
-    Height = 23
-    TabOrder = 0
-    OnChange = edtPesquisaChange
   end
   object dsUsuarios: TDataSource
     DataSet = DM.qryUsuarios
