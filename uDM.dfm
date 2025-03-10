@@ -10,7 +10,6 @@ object DM: TDM
       'Password=123456'
       'Server=localhost'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Transaction = Trans
     Left = 16
@@ -388,7 +387,7 @@ object DM: TDM
     end
   end
   object FDMySQLLink: TFDPhysMySQLDriverLink
-    VendorLib = 'D:\Projetos\Delphi\ControleFinanceiro\Win32\Debug\libmysql.dll'
+    VendorLib = 'D:\Projetos\Delphi\FinanceiroPessoal\Win32\Debug\LIBMYSQL.DLL'
     Left = 272
     Top = 16
   end
