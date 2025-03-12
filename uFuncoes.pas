@@ -11,12 +11,19 @@ uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
     FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
     FireDAC.Comp.Client, frxClass, frxExportBaseDialog, frxExportPDF, frxDBSet;
 
+type
+  TFeriados = (frPascoa, frCarnaval, frQuartaCinzas, frSextaSanta, frCorpusChristi);
+
   function Criptografar(cTexto : String) : String;
-  function MessageDlgDefault(Msg :String;
-    AType: TMsgDlgType; AButtons : TMsgDlgButtons; IndiceHelp : LongInt;
-    DefButton : TModalResult=MrNone) : Word;
+  function MessageDlgDefault(Msg :String; AType: TMsgDlgType;
+           AButtons : TMsgDlgButtons; IndiceHelp : LongInt;
+           DefButton : TModalResult=MrNone) : Word;
   function ExtensoMes(n: Integer): String;
   function getMaiorData(nIdUsuario : Integer): TDate;
+  function DiasUteis(dataini, datafin: string): integer;
+  function CalculaPascoa(AAno: Word): TDateTime;
+  function CalculaFeriado(AAno: Word; ATipo: TFeriados): TDateTime;
+  function IncYear(const DateTime: TDateTime; NumberOfYear: Integer):TDateTime;
 implementation
 
 uses uDM;
@@ -144,6 +151,104 @@ begin
     dDataMaior := QryMaxDate.FieldByName('dataMaior').AsDateTime;
 
   Result  :=  dDataMaior;
+end;
+
+function DiasUteis(dataini, datafin: string): integer;
+var
+	a,b,c:tdatetime;
+	ct,s:integer;
+begin
+	if StrToDate(DataFin) < StrtoDate(DataIni) then
+	begin
+		Result := 0;
+		exit;
+	end;
+
+	ct := 0;
+	s := 1;
+	a := strtodate(dataFin);
+	b := strtodate(dataIni);
+
+	if a > b then
+	begin
+		c := a;
+		a := b;
+		b := c;
+		s := 1;
+	end;
+
+	a := a + 1;
+
+	while (dayofweek(a)<>2) and (a <= b) do
+	begin
+		if dayofweek(a) in [2..6] then
+			inc(ct);
+
+		a := a + 1;
+	end;
+
+	ct := ct + round((5*int((b-a)/7)));
+	a := a + (7*int((b-a)/7));
+
+	while a <= b do
+	begin
+		if dayofweek(a) in [2..6] then
+			inc(ct);
+
+		a := a + 1;
+	end;
+
+	if ct < 0 then
+		ct := 0;
+
+	result := s*ct;
+end;
+
+function CalculaPascoa(AAno: Word): TDateTime;
+var
+  R1, R2, R3, R4, R5 : Longint;
+  FPascoa : TDateTime;
+  VJ, VM, VD : Word;
+begin
+  R1 := AAno mod 19;
+  R2 := AAno mod 4;
+  R3 := AAno mod 7;
+  R4 := (19 * R1 + 24) mod 30;
+  R5 := (6 * R4 + 4 * R3 + 2 * R2 + 5) mod 7;
+  FPascoa := EncodeDate(AAno, 3, 22);
+  FPascoa := FPascoa + R4 + R5;
+  DecodeDate(FPascoa, VJ, VM, VD);
+  case VD of
+    26 : FPascoa := EncodeDate(Aano, 4, 19);
+    25 : if R1 > 10 then
+           FPascoa := EncodeDate(AAno, 4, 18);
+  end;
+  Result:= FPascoa;
+end;
+
+function CalculaFeriado(AAno: Word; ATipo: TFeriados): TDateTime;
+var
+  Aux: TDateTime;
+begin
+  Aux := CalculaPascoa(AAno);
+  Case ATipo of
+    frCarnaval : Aux := Aux - 47;
+    frQuartaCinzas : Aux := Aux - 46;
+    frSextaSanta : Aux := Aux - 2;
+    frCorpusChristi: Aux := Aux + 60;
+  end;
+  Result := Aux;
+end;
+
+function IncYear(const DateTime: TDateTime; NumberOfYear: Integer):TDateTime;
+var
+  Year, Month, Day: Word;
+begin
+  DecodeDate(DateTime, Year, Month, Day);
+
+  Year := Year + NumberOfYear;
+  Result := EncodeDate(Year, Month, Day);
+  ReplaceTime(Result, DateTime);
 end;
 
 end.

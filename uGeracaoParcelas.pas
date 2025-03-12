@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Datasnap.DBClient, math, clipbrd;
+  Datasnap.DBClient, math, clipbrd, System.DateUtils;
 
 type
   TfrmGeracaoParcelas = class(TForm)
@@ -21,27 +21,29 @@ type
     btnSalvarParcelasGeradas: TBitBtn;
     btnSair: TBitBtn;
     dsParcelasDespesas: TDataSource;
-    lblVencimento: TLabel;
-    lblDespesa: TLabel;
-    lblCategoriaDespesa: TLabel;
-    lkpCategoriaDespesa: TDBLookupComboBox;
     qrylkpCategoriasDespesa: TFDQuery;
     qrylkpCategoriasDespesaID: TIntegerField;
     qrylkpCategoriasDespesaDESCRICAO: TStringField;
     dslkpCategoriasDespesa: TDataSource;
-    lblValorTotalAPagar: TLabel;
-    lblQtdeParcelas: TLabel;
-    edtQtdeParcelas: TEdit;
     cdsDespesas: TClientDataSet;
     cdsDespesasdataVencimento: TDateField;
     cdsDespesascategoria: TIntegerField;
     cdsDespesasdescricao: TStringField;
     cdsDespesascategoriaDespesa: TStringField;
-    edtDTVencimento: TMaskEdit;
-    edtValorAPagar: TEdit;
-    edtDespesa: TEdit;
     cdsDespesasvalorAPagar: TFloatField;
     btnExcluirParcela: TBitBtn;
+    lblVencimento: TLabel;
+    lblDespesa: TLabel;
+    lblCategoriaDespesa: TLabel;
+    lblValorTotalAPagar: TLabel;
+    lblQtdeParcelas: TLabel;
+    lkpCategoriaDespesa: TDBLookupComboBox;
+    edtQtdeParcelas: TEdit;
+    edtValorAPagar: TEdit;
+    edtDespesa: TEdit;
+    cboTipoParcelamento: TComboBox;
+    lblTipoParcelamento: TLabel;
+    edtDTVencimento: TMaskEdit;
     rgFormaParcelas: TRadioGroup;
     procedure btnSairClick(Sender: TObject);
     procedure btnGerarParcelasClick(Sender: TObject);
@@ -52,12 +54,15 @@ type
     procedure btnDesfazerParcelasClick(Sender: TObject);
     procedure btnExcluirParcelaClick(Sender: TObject);
     procedure btnSalvarParcelasGeradasClick(Sender: TObject);
+    procedure rgFormaParcelasClick(Sender: TObject);
+    procedure edtQtdeParcelasExit(Sender: TObject);
   private
     { Private declarations }
     function ValidaParcelas:Boolean;
     function DisplayFormatter(AValue: double; ADisplayFormato: String): String;
     procedure GerarValorTotalParcelas();
     procedure GerarValorPorParcela();
+    function ValidaCampos():boolean;
   public
     { Public declarations }
     nIdUsuario   : Integer;
@@ -106,12 +111,15 @@ end;
 
 procedure TfrmGeracaoParcelas.btnGerarParcelasClick(Sender: TObject);
 begin
-  if rgFormaParcelas.ItemIndex = 0 then
-    GerarValorPorParcela()
-  else if rgFormaParcelas.ItemIndex = 1 then
-    GerarValorTotalParcelas();
+  if ValidaCampos() then
+  begin
+    if rgFormaParcelas.ItemIndex = 0 then
+      GerarValorPorParcela()
+    else if rgFormaParcelas.ItemIndex = 1 then
+      GerarValorTotalParcelas();
 
-  btnSalvarParcelasGeradas.Enabled := cdsDespesas.RecordCount > 0;
+    btnSalvarParcelasGeradas.Enabled := cdsDespesas.RecordCount > 0;
+  end;
 end;
 
 procedure TfrmGeracaoParcelas.btnNovaParcelaClick(Sender: TObject);
@@ -177,6 +185,15 @@ end;
 function TfrmGeracaoParcelas.DisplayFormatter(AValue: double; ADisplayFormato: String): String;
 begin
   Result := FormatFloat(ADisplayFormato, AValue);
+end;
+
+procedure TfrmGeracaoParcelas.edtQtdeParcelasExit(Sender: TObject);
+var
+  iAux: Double;
+
+begin
+  if (edtQtdeParcelas.Text = EmptyStr) then
+    edtQtdeParcelas.Text := '0';
 end;
 
 procedure TfrmGeracaoParcelas.edtValorAPagarExit(Sender: TObject);
@@ -270,6 +287,24 @@ begin
 
 end;
 
+procedure TfrmGeracaoParcelas.rgFormaParcelasClick(Sender: TObject);
+begin
+  case rgFormaParcelas.ItemIndex of
+    //Valor de cada Parcela
+    0:
+    begin
+      cboTipoParcelamento.Enabled   := true;
+      cboTipoParcelamento.ItemIndex :=  0;
+    end;
+    //Valor Total das Parcelas
+    1:
+    begin
+      cboTipoParcelamento.ItemIndex :=  1;
+      cboTipoParcelamento.Enabled   := false;
+    end;
+  end;
+end;
+
 procedure TfrmGeracaoParcelas.GerarValorPorParcela();
 var
   lnCont, lnQtdeParcelas, lnCodCategoriaDespesa : Integer;
@@ -302,9 +337,58 @@ begin
 
     cdsDespesas.Post;
 
-    ldDtVencimento := IncMonth(ldDtVencimento, 1);
+    case cboTipoParcelamento.ItemIndex of
+      //Ano
+      0: ldDtVencimento := uFuncoes.IncYear(ldDtVencimento, 1);
+      //Mês
+      1: ldDtVencimento := IncMonth(ldDtVencimento, 1);
+      //Semana
+      2: ldDtVencimento := IncDay(ldDtVencimento, 7);
+    end;
   end;
 
+end;
+
+function TfrmGeracaoParcelas.ValidaCampos():boolean;
+var
+  lRetorno : Boolean;
+begin
+  lRetorno := true;
+
+  if trim(edtDTVencimento.Text) = '/  /' then
+  begin
+    lRetorno := false;
+    ShowMessage('Campo data não pode ser vazio');
+  end;
+
+  if (lRetorno = true) and (cdsDespesascategoria.Value < 1) then
+  begin
+    lRetorno := false;
+    ShowMessage('Campo categoria não pode ser vazio');
+  end;
+
+  if (lRetorno = true) and (trim(edtDespesa.Text) = '') then
+  begin
+    lRetorno := false;
+    ShowMessage('Campo despesa não pode ser vazio');
+  end;
+
+  if (lRetorno = true) and
+    ((trim(edtValorAPagar.Text) = '0,00') OR (trim(edtValorAPagar.Text) = '')) then
+  begin
+    lRetorno := false;
+    ShowMessage('Campo valor a pagar não pode ser vazio');
+  end;
+
+
+  if (lRetorno = true) and
+    ((trim(edtQtdeParcelas.Text) = '0') OR (trim(edtQtdeParcelas.Text) = ''))  then
+  begin
+    lRetorno := false;
+    ShowMessage('Campo quantidade de parcelas não pode ser vazio');
+  end;
+
+  Result := lRetorno;
 end;
 
 end.

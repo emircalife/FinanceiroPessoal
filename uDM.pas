@@ -9,7 +9,7 @@ uses
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Phys.IBBase, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.MySQL,
-  FireDAC.Phys.MySQLDef;
+  FireDAC.Phys.MySQLDef, INIFiles, Vcl.Dialogs;
 
 type
   TDM = class(TDataModule)
@@ -72,9 +72,11 @@ type
     procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
+    iIniFile : TIniFile;
   public
     { Public declarations }
     function getNextId(vGen: String): integer;
+    function LerIni(Chave1, Chave2: String; ValorPadrao: String = ''): String;
   end;
 
 var
@@ -86,28 +88,54 @@ implementation
 
 {$R *.dfm}
 
+function TDM.LerIni(Chave1, Chave2: String; ValorPadrao: String = ''): String;
+var
+  Arquivo: String;
+  FileIni: TIniFile;
+begin
+  Arquivo := ExtractFilePath(ParamStr(0)) + 'config.ini';
+  result := ValorPadrao;
+  try
+    FileIni := TIniFile.Create(Arquivo);
+    if FileExists(Arquivo) then
+    begin
+      result := FileIni.ReadString(Chave1, Chave2, ValorPadrao);
+    end;
+  finally
+    FreeAndNil(FileIni)
+  end;
+end;
+
 procedure TDM.DataModuleCreate(Sender: TObject);
 var
-  driver  : String;
+  cDriverID, cServer, cDatabase, cUser, cPassword, cBD : String;
 begin
-  driver  :=  '';
+  cBD       := LerIni('Config', 'BD');
 
-  if driver = 'FB' then
+
+  if cBD = 'MySQL' then
   begin
-    Conn.DriverName       :=  'FB';
-    Conn.Params.UserName  :=  'SYSDBA';
-    Conn.Params.Password  :=  'masterkey';
-    Conn.Params.Database  :=  'D:\Projetos\Delphi\ControleFinanceiro\DB\FINANCEIRODB.FDB';
-  end else if driver = 'MySQL' then
-  begin
-//    Conn.DriverName       :=  'MySQL';
-//    Conn.Params.UserName  :=  'root';
-//    Conn.Params.Password  :=  '123456';
-//    Conn.Params.Database  :=  'FinanceiroDB';
-//    Conn.Params.Server    :=  'localhost';
+    cDriverID := 'MySQL';
+    try
+      with Conn do
+      begin
+        cServer   :=  LerIni(cDriverID,'Server');
+        cDatabase :=  LerIni(cDriverID,'Database');
+        cUser     :=  LerIni(cDriverID,'User');
+        cPassword :=  LerIni(cDriverID,'Password');
+
+        Params.Clear;
+        Params.Values['DriverID']   := cDriverID;
+        Params.Values['Server']     := cServer;
+        Params.Values['Database']   := cDatabase;
+        Params.Values['User_name']  := cUser;
+        Params.Values['Password']   := cPassword;
+        Connected := True;
+      end;
+    except
+      ShowMessage('Ocorreu uma Falha na configuração no Banco de dados ' + QuotedStr(cDriverID));
+    end;
   end;
-
-  Conn.Connected := true;
 end;
 
 procedure TDM.DataModuleDestroy(Sender: TObject);

@@ -54,16 +54,23 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
     Height = 15
     Caption = 'Qtde de Parcelas'
   end
+  object lblTipoParcelamento: TLabel
+    Left = 616
+    Top = 434
+    Width = 116
+    Height = 15
+    Caption = 'Tipo de Parcelamento'
+  end
   object grdParcelasDespesas: TDBGrid
     Left = 1
     Top = 8
-    Width = 896
+    Width = 908
     Height = 349
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = dsParcelasDespesas
     ReadOnly = True
-    TabOrder = 7
+    TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12
@@ -103,12 +110,10 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
   object pnlBotoes: TPanel
     Left = 1
     Top = 470
-    Width = 896
+    Width = 908
     Height = 78
     Anchors = [akLeft, akRight, akBottom]
-    TabOrder = 6
-    ExplicitTop = 469
-    ExplicitWidth = 892
+    TabOrder = 8
     object btnAlterarParcela: TBitBtn
       AlignWithMargins = True
       Left = 4
@@ -158,7 +163,7 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
     end
     object btnSair: TBitBtn
       AlignWithMargins = True
-      Left = 792
+      Left = 804
       Top = 4
       Width = 100
       Height = 70
@@ -166,7 +171,7 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
       Caption = 'Sai&r'
       TabOrder = 4
       OnClick = btnSairClick
-      ExplicitLeft = 788
+      ExplicitLeft = 784
     end
     object btnExcluirParcela: TBitBtn
       AlignWithMargins = True
@@ -184,49 +189,64 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
   object lkpCategoriaDespesa: TDBLookupComboBox
     Left = 322
     Top = 375
-    Width = 288
+    Width = 286
     Height = 23
     DataField = 'categoria'
     DataSource = dsParcelasDespesas
     KeyField = 'ID'
     ListField = 'DESCRICAO'
     ListSource = dslkpCategoriasDespesa
-    TabOrder = 1
+    TabOrder = 2
   end
   object edtQtdeParcelas: TEdit
     Left = 322
     Top = 433
-    Width = 97
+    Width = 95
     Height = 23
     Alignment = taRightJustify
     NumbersOnly = True
+    TabOrder = 5
+    OnExit = edtQtdeParcelasExit
+  end
+  object edtValorAPagar: TEdit
+    Left = 111
+    Top = 433
+    Width = 95
+    Height = 23
+    Alignment = taRightJustify
     TabOrder = 4
+    OnExit = edtValorAPagarExit
+  end
+  object edtDespesa: TEdit
+    Left = 111
+    Top = 404
+    Width = 497
+    Height = 23
+    TabOrder = 3
+  end
+  object cboTipoParcelamento: TComboBox
+    Left = 748
+    Top = 431
+    Width = 143
+    Height = 23
+    Style = csDropDownList
+    ItemIndex = 1
+    TabOrder = 7
+    Text = 'Mensal'
+    Items.Strings = (
+      'Anual'
+      'Mensal'
+      'Semanal')
   end
   object edtDTVencimento: TMaskEdit
-    Left = 110
+    Left = 111
     Top = 375
     Width = 98
     Height = 23
     EditMask = '!99/99/0000;1;_'
     MaxLength = 10
-    TabOrder = 0
+    TabOrder = 1
     Text = '  /  /    '
-  end
-  object edtValorAPagar: TEdit
-    Left = 111
-    Top = 433
-    Width = 97
-    Height = 23
-    Alignment = taRightJustify
-    TabOrder = 3
-    OnExit = edtValorAPagarExit
-  end
-  object edtDespesa: TEdit
-    Left = 110
-    Top = 404
-    Width = 500
-    Height = 23
-    TabOrder = 2
   end
   object rgFormaParcelas: TRadioGroup
     Left = 616
@@ -239,7 +259,8 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
     Items.Strings = (
       'Valor de cada Parcela'
       'Valor Total das Parcelas')
-    TabOrder = 5
+    TabOrder = 6
+    OnClick = rgFormaParcelasClick
   end
   object dsParcelasDespesas: TDataSource
     DataSet = cdsDespesas
