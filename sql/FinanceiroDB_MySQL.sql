@@ -1,92 +1,69 @@
-CREATE DATABASE `financeirodb`
+CREATE DATABASE `financeirodb`;
 
-CREATE TABLE `financeirodb`.`niveisacesso` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `descricao` VARCHAR(150) NOT NULL,
-  PRIMARY KEY (`id`));
-  
- CREATE TABLE `financeirodb`.`usuarios` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(35) NOT NULL,
-  `senha` VARCHAR(150) NOT NULL,
-  `idNivel` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `FK_NiveisAcesso_idx` (`idNivel` ASC) VISIBLE,
-  CONSTRAINT `FKUsuarios_NiveisAcesso`
-    FOREIGN KEY (`idNivel`)
-    REFERENCES `financeirodb`.`niveisacesso` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE `niveisacesso` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+);
 
-CREATE TABLE `financeirodb`.`categoriasdespesa` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `descricao` VARCHAR(255) NOT NULL,
-  `idUsuario` INT NOT NULL,
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `login` varchar(35) NOT NULL,
+  `senha` varchar(150) NOT NULL,
+  `idNivel` int NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `FKCategoriasDespesa_Usuarios_idx` (`idUsuario` ASC) VISIBLE,
-  CONSTRAINT `FKCategoriasDespesa_Usuarios`
-    FOREIGN KEY (`idUsuario`)
-    REFERENCES `financeirodb`.`usuarios` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  KEY `FK_NiveisAcesso_idx` (`idNivel`),
+  CONSTRAINT `FKUsuarios_NiveisAcesso` FOREIGN KEY (`idNivel`) REFERENCES `niveisacesso` (`id`)
+);
 
-CREATE TABLE `financeirodb`.`categoriasreceita` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `descricao` VARCHAR(255) NOT NULL,
-  `idUsuario` INT NOT NULL,
+CREATE TABLE `categoriasdespesa` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(255) NOT NULL,
+  `idUsuario` int NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `FKCategoriasReceita_Usuarios_idx` (`idUsuario` ASC) VISIBLE,
-  CONSTRAINT `FKCategoriasReceita_Usuarios`
-    FOREIGN KEY (`idUsuario`)
-    REFERENCES `financeirodb`.`usuarios` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-	
-CREATE TABLE `financeirodb`.`lancamentosdespesa` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `descricao` VARCHAR(255) NOT NULL,
-  `datavencimento` DATE NOT NULL,
-  `valorapagar` DECIMAL(15,2) NOT NULL,
-  `valorpago` DECIMAL(15,2) NULL,
-  `idCategoria` INT NOT NULL,
-  `idUsuario` INT NOT NULL,
-  `datapagamento` DATE NULL,
-  `observacoes` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `FKLancamentosDespesa_Categorias_idx` (`idCategoria` ASC) VISIBLE,
-  INDEX `FKLancamentosDespesa_Usuarios_idx` (`idUsuario` ASC) VISIBLE,
-  CONSTRAINT `FKLancamentosDespesa_Categorias`
-    FOREIGN KEY (`idCategoria`)
-    REFERENCES `financeirodb`.`categoriasdespesa` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FKLancamentosDespesa_Usuarios`
-    FOREIGN KEY (`idUsuario`)
-    REFERENCES `financeirodb`.`usuarios` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  KEY `FKCategoriasDespesa_Usuarios_idx` (`idUsuario`),
+  CONSTRAINT `FKCategoriasDespesa_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
+);
 
-CREATE TABLE `financeirodb`.`lancamentosreceita` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `descricao` VARCHAR(255) NOT NULL,
-  `dataareceber` DATE NOT NULL,
-  `valorareceber` DECIMAL(15,2) NOT NULL,
-  `datarecebimento` DATE NULL,
-  `LancamentosReceitacol` VARCHAR(45) NULL,
-  `valorrecebido` DECIMAL(15,2) NULL,
-  `idCategoria` INT NOT NULL,
-  `idUsuario` INT NOT NULL,
-  `observacoes` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`, `idCategoria`),
-  INDEX `FKLancamentosReceita_Categorias_idx` (`idCategoria` ASC) VISIBLE,
-  INDEX `FKLancamentosReceita_Usuarios_idx` (`idUsuario` ASC) VISIBLE,
-  CONSTRAINT `FKLancamentosReceita_Categorias`
-    FOREIGN KEY (`idCategoria`)
-    REFERENCES `financeirodb`.`categoriasreceita` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FKLancamentosReceita_Usuarios`
-    FOREIGN KEY (`idUsuario`)
-    REFERENCES `financeirodb`.`usuarios` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE `lancamentosdespesa` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(255) NOT NULL,
+  `datavencimento` date NOT NULL,
+  `valorapagar` decimal(15,2) NOT NULL,
+  `valorpago` decimal(15,2) DEFAULT NULL,
+  `idCategoria` int NOT NULL,
+  `idUsuario` int NOT NULL,
+  `datapagamento` date DEFAULT NULL,
+  `observacoes` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKLancamentosDespesa_Categorias_idx` (`idCategoria`),
+  KEY `FKLancamentosDespesa_Usuarios_idx` (`idUsuario`),
+  CONSTRAINT `FKLancamentosDespesa_Categorias` FOREIGN KEY (`idCategoria`) REFERENCES `categoriasdespesa` (`id`),
+  CONSTRAINT `FKLancamentosDespesa_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
+);
+
+CREATE TABLE `categoriasreceita` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(255) NOT NULL,
+  `idUsuario` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKCategoriasReceita_Usuarios_idx` (`idUsuario`),
+  CONSTRAINT `FKCategoriasReceita_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
+);
+
+CREATE TABLE `lancamentosreceita` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(255) NOT NULL,
+  `dataareceber` date NOT NULL,
+  `valorareceber` decimal(15,2) NOT NULL,
+  `datarecebimento` date DEFAULT NULL,
+  `valorrecebido` decimal(15,2) DEFAULT NULL,
+  `idCategoria` int NOT NULL,
+  `idUsuario` int NOT NULL,
+  `observacoes` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`,`idCategoria`),
+  KEY `FKLancamentosReceita_Categorias_idx` (`idCategoria`),
+  KEY `FKLancamentosReceita_Usuarios_idx` (`idUsuario`),
+  CONSTRAINT `FKLancamentosReceita_Categorias` FOREIGN KEY (`idCategoria`) REFERENCES `categoriasreceita` (`id`),
+  CONSTRAINT `FKLancamentosReceita_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
+);

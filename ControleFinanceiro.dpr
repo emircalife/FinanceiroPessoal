@@ -13,7 +13,8 @@ uses
   uLogin in 'uLogin.pas' {frmLogin},
   uFuncoes in 'uFuncoes.pas',
   uUsuarios in 'uUsuarios.pas' {frmUsuarios},
-  uImprDespesas in 'uImprDespesas.pas' {frmImprDespesas};
+  uImprDespesas in 'uImprDespesas.pas' {frmImprDespesas},
+  uRelDespesas in 'uRelDespesas.pas' {frmRelDespesas};
 
 {$R *.res}
 var
@@ -25,6 +26,7 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmImprDespesas, frmImprDespesas);
+  Application.CreateForm(TfrmRelDespesas, frmRelDespesas);
   if FrmLogin.ShowModal = mrOk then //Caso o retorno da tela seja Ok
   begin
     nIdUsuario   := frmLogin.nIdUsuario;

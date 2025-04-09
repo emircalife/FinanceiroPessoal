@@ -12,6 +12,7 @@ object frmMain: TfrmMain
   Font.Style = []
   Menu = mnuMainMenu
   Position = poScreenCenter
+  WindowState = wsMaximized
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
@@ -32,22 +33,48 @@ object frmMain: TfrmMain
     Height = 15
     Caption = 'Pesquisa'
   end
+  object lblDescrDiasUteisNoMes: TLabel
+    Left = 1002
+    Top = 16
+    Width = 99
+    Height = 15
+    Caption = 'Dias '#250'teis no m'#234's:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblDiasUteisNoMes: TLabel
+    Left = 1103
+    Top = 16
+    Width = 22
+    Height = 15
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'lblDiasUteisNoMes'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object grpDespesas: TGroupBox
     AlignWithMargins = True
     Left = 8
     Top = 45
-    Width = 1123
+    Width = 1119
     Height = 428
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = '   Despesas   '
-    TabOrder = 3
-    ExplicitWidth = 1119
-    ExplicitHeight = 427
+    TabOrder = 2
     DesignSize = (
-      1123
+      1119
       428)
     object lblTotalDespesas: TLabel
-      Left = 900
+      Left = 896
       Top = 192
       Width = 212
       Height = 15
@@ -61,6 +88,7 @@ object frmMain: TfrmMain
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 900
     end
     object Label5: TLabel
       Left = 181
@@ -179,7 +207,7 @@ object frmMain: TfrmMain
     object grdDespesas: TDBGrid
       Left = 2
       Top = 17
-      Width = 1119
+      Width = 1115
       Height = 169
       TabStop = False
       Align = alTop
@@ -212,17 +240,25 @@ object frmMain: TfrmMain
           Visible = True
         end
         item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DATAPAGAMENTO'
+          Title.Caption = 'DT Pagamento'
+          Width = 100
+          Visible = True
+        end
+        item
           Expanded = False
           FieldName = 'DESCRICAO'
           Title.Caption = 'Despesa'
-          Width = 370
+          Width = 330
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'categoriaDespesa'
           Title.Caption = 'Categoria'
-          Width = 345
+          Width = 257
           Visible = True
         end
         item
@@ -237,6 +273,13 @@ object frmMain: TfrmMain
           FieldName = 'VALORPAGO'
           Title.Caption = 'R$ Pago'
           Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALORDIFERENCA'
+          Title.Caption = 'R$ Diferen'#231'a'
+          Width = 73
           Visible = True
         end>
     end
@@ -334,12 +377,10 @@ object frmMain: TfrmMain
       AlignWithMargins = True
       Left = 5
       Top = 333
-      Width = 1113
+      Width = 1109
       Height = 90
       Align = alBottom
       TabOrder = 9
-      ExplicitTop = 332
-      ExplicitWidth = 1109
       object btnNovoDespesa: TBitBtn
         AlignWithMargins = True
         Left = 4
@@ -977,15 +1018,13 @@ object frmMain: TfrmMain
     AlignWithMargins = True
     Left = 8
     Top = 479
-    Width = 1123
+    Width = 1119
     Height = 343
     Anchors = [akLeft, akRight, akBottom]
     Caption = '   Receitas   '
-    TabOrder = 4
-    ExplicitTop = 478
-    ExplicitWidth = 1119
+    TabOrder = 3
     DesignSize = (
-      1123
+      1119
       343)
     object lblDTRecebimento: TLabel
       Left = 784
@@ -1035,7 +1074,7 @@ object frmMain: TfrmMain
     object lblTotalReceitas: TLabel
       Left = 900
       Top = 132
-      Width = 212
+      Width = 208
       Height = 16
       Alignment = taRightJustify
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1047,6 +1086,7 @@ object frmMain: TfrmMain
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitWidth = 212
     end
     object lblDTAReceber: TLabel
       Left = 6
@@ -1067,7 +1107,7 @@ object frmMain: TfrmMain
     object grdReceitas: TDBGrid
       Left = 2
       Top = 17
-      Width = 1119
+      Width = 1115
       Height = 112
       TabStop = False
       Align = alTop
@@ -1093,6 +1133,14 @@ object frmMain: TfrmMain
         item
           Alignment = taCenter
           Expanded = False
+          FieldName = 'DATAARECEBER'
+          Title.Caption = 'DT a Receber'
+          Width = 100
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
           FieldName = 'DATARECEBIMENTO'
           Title.Caption = 'DT Recebimento'
           Width = 100
@@ -1102,14 +1150,14 @@ object frmMain: TfrmMain
           Expanded = False
           FieldName = 'DESCRICAO'
           Title.Caption = 'Receita'
-          Width = 374
+          Width = 326
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'categoriaReceita'
           Title.Caption = 'Categoria'
-          Width = 345
+          Width = 334
           Visible = True
         end
         item
@@ -1130,11 +1178,10 @@ object frmMain: TfrmMain
     object pnlBotoesReceitas: TPanel
       Left = 2
       Top = 263
-      Width = 1119
+      Width = 1115
       Height = 78
       Align = alBottom
       TabOrder = 8
-      ExplicitWidth = 1115
       object btnNovoReceita: TBitBtn
         AlignWithMargins = True
         Left = 4
@@ -1694,7 +1741,7 @@ object frmMain: TfrmMain
       end
       object btnSair: TBitBtn
         AlignWithMargins = True
-        Left = 1015
+        Left = 1011
         Top = 4
         Width = 100
         Height = 70
@@ -1802,7 +1849,6 @@ object frmMain: TfrmMain
         Layout = blGlyphTop
         TabOrder = 5
         OnClick = btnSairClick
-        ExplicitLeft = 1011
       end
       object grpTotaisReceitas: TGroupBox
         Left = 558
@@ -1953,24 +1999,13 @@ object frmMain: TfrmMain
     end
   end
   object cboMesAno: TComboBox
-    Left = 65
-    Top = 16
+    Left = 64
+    Top = 12
     Width = 92
     Height = 23
     Style = csDropDownList
     TabOrder = 0
     OnChange = cboMesAnoChange
-  end
-  object btnCalendario: TBitBtn
-    Left = 1031
-    Top = 8
-    Width = 100
-    Height = 31
-    Anchors = [akTop, akRight]
-    Caption = '&Calend'#225'rio'
-    TabOrder = 2
-    OnClick = btnCalendarioClick
-    ExplicitLeft = 1027
   end
   object edtPesquisa: TEdit
     Left = 220
@@ -2016,6 +2051,17 @@ object frmMain: TfrmMain
       object Despesas4: TMenuItem
         Caption = 'Despesas'
         OnClick = Despesas4Click
+      end
+    end
+    object Aplicativos1: TMenuItem
+      Caption = '&Aplicativos'
+      object Calculadora1: TMenuItem
+        Caption = '&Calculadora'
+        OnClick = Calculadora1Click
+      end
+      object Calendrio1: TMenuItem
+        Caption = 'C&alend'#225'rio'
+        OnClick = Calendrio1Click
       end
     end
   end
@@ -2082,461 +2128,5 @@ object frmMain: TfrmMain
     DataSet = qrylkpCategoriasReceita
     Left = 720
     Top = 552
-  end
-  object frxPDFExport: TfrxPDFExport
-    UseFileCache = True
-    ShowProgress = True
-    OverwritePrompt = False
-    DataOnly = False
-    EmbedFontsIfProtected = False
-    InteractiveFormsFontSubset = 'A-Z,a-z,0-9,#43-#47 '
-    OpenAfterExport = False
-    PrintOptimized = False
-    Outline = False
-    Background = False
-    HTMLTags = True
-    Quality = 95
-    Transparency = False
-    Author = 'FastReport'
-    Subject = 'FastReport PDF export'
-    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
-    HideToolbar = False
-    HideMenubar = False
-    HideWindowUI = False
-    FitWindow = False
-    CenterWindow = False
-    PrintScaling = False
-    PdfA = False
-    PDFStandard = psNone
-    PDFVersion = pv17
-    Left = 995
-    Top = 101
-  end
-  object frxDBDsReport: TfrxDBDataset
-    UserName = 'frxDBDsReport'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'ID=ID'
-      'DESCRICAO=DESCRICAO'
-      'DATAVENCIMENTO=DATAVENCIMENTO'
-      'VALORAPAGAR=VALORAPAGAR'
-      'VALORPAGO=VALORPAGO'
-      'CATEGORIA=CATEGORIA'
-      'CATEGORIADESPESA=CATEGORIADESPESA')
-    DataSet = DM.qryDespesas
-    BCDToCurrency = False
-    Left = 959
-    Top = 125
-  end
-  object frxRelDespesadDoMes: TfrxReport
-    Version = '6.9.14'
-    DotMatrixReport = False
-    IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
-    PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
-    PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45705.648651226900000000
-    ReportOptions.LastChange = 45708.704542037030000000
-    ScriptLanguage = 'PascalScript'
-    ScriptText.Strings = (
-      ''
-      'begin'
-      ''
-      'end.')
-    Left = 1051
-    Top = 149
-    Datasets = <
-      item
-        DataSet = frxDBDsReport
-        DataSetName = 'frxDBDsReport'
-      end>
-    Variables = <
-      item
-        Name = ' REPORT'
-        Value = Null
-      end
-      item
-        Name = 'TITULO'
-        Value = Null
-      end
-      item
-        Name = 'PAGO'
-        Value = '<frxDBDsReport."VALORAPAGAR">=<frxDBDsReport."VALORPAGO">'
-      end>
-    Style = <
-      item
-        Name = 'Title'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        Frame.Typ = []
-        Fill.BackColor = clGray
-      end
-      item
-        Name = 'Header'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clMaroon
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        Frame.Typ = []
-      end
-      item
-        Name = 'Group header'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clMaroon
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        Frame.Typ = []
-        Fill.BackColor = 16053492
-      end
-      item
-        Name = 'Data'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-        Frame.Typ = []
-      end
-      item
-        Name = 'Group footer'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        Frame.Typ = []
-      end
-      item
-        Name = 'Header line'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-        Frame.Typ = [ftBottom]
-        Frame.Width = 2.000000000000000000
-      end>
-    object Data: TfrxDataPage
-      Height = 1000.000000000000000000
-      Width = 1000.000000000000000000
-    end
-    object Page1: TfrxReportPage
-      PaperWidth = 210.000000000000000000
-      PaperHeight = 297.000000000000000000
-      PaperSize = 9
-      LeftMargin = 10.000000000000000000
-      RightMargin = 10.000000000000000000
-      TopMargin = 10.000000000000000000
-      BottomMargin = 10.000000000000000000
-      Frame.Typ = []
-      MirrorMode = []
-      object ReportTitle1: TfrxReportTitle
-        FillType = ftBrush
-        FillGap.Top = 0
-        FillGap.Left = 0
-        FillGap.Bottom = 0
-        FillGap.Right = 0
-        Frame.Typ = []
-        Height = 26.456710000000000000
-        Top = 18.897650000000000000
-        Width = 718.110700000000000000
-        object TITULO: TfrxMemoView
-          IndexTag = 1
-          AllowVectorExport = True
-          Width = 714.331170000000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[TITULO]')
-        end
-      end
-      object PageHeader1: TfrxPageHeader
-        FillType = ftBrush
-        FillGap.Top = 0
-        FillGap.Left = 0
-        FillGap.Bottom = 0
-        FillGap.Right = 0
-        Frame.Typ = []
-        Height = 41.574830000000000000
-        Top = 68.031540000000000000
-        Width = 718.110700000000000000
-        object Memo2: TfrxMemoView
-          AllowVectorExport = True
-          Width = 718.110236220000000000
-          Height = 22.677180000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftBottom]
-          Frame.Width = 2.000000000000000000
-          ParentFont = False
-          Style = 'Header line'
-        end
-        object Memo3: TfrxMemoView
-          AllowVectorExport = True
-          Left = 22.000000000000000000
-          Width = 79.866110000000000000
-          Height = 22.677180000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'Vencimento')
-          ParentFont = False
-          Style = 'Header'
-        end
-        object Memo4: TfrxMemoView
-          AllowVectorExport = True
-          Left = 106.322820000000000000
-          Width = 156.075668140000000000
-          Height = 22.677180000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'Categoria')
-          ParentFont = False
-          Style = 'Header'
-        end
-        object Memo5: TfrxMemoView
-          AllowVectorExport = True
-          Left = 262.398488140000000000
-          Width = 241.180850680000000000
-          Height = 22.677180000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'Despesa')
-          ParentFont = False
-          Style = 'Header'
-        end
-        object Memo6: TfrxMemoView
-          AllowVectorExport = True
-          Left = 503.579338820000000000
-          Width = 104.924527400000000000
-          Height = 22.677180000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            'R$ a Pagar')
-          ParentFont = False
-          Style = 'Header'
-        end
-        object Memo14: TfrxMemoView
-          AllowVectorExport = True
-          Left = 613.842920000000000000
-          Width = 101.144997400000000000
-          Height = 22.677180000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            'R$ Pago')
-          ParentFont = False
-          Style = 'Header'
-        end
-      end
-      object MasterData1: TfrxMasterData
-        FillType = ftBrush
-        FillGap.Top = 0
-        FillGap.Left = 0
-        FillGap.Bottom = 0
-        FillGap.Right = 0
-        Frame.Typ = []
-        Height = 18.897650000000000000
-        Top = 170.078850000000000000
-        Width = 718.110700000000000000
-        DataSet = frxDBDsReport
-        DataSetName = 'frxDBDsReport'
-        RowCount = 0
-        object Memo7: TfrxMemoView
-          AllowVectorExport = True
-          Left = 27.000000000000000000
-          Width = 79.866110000000000000
-          Height = 18.897650000000000000
-          DataField = 'DATAVENCIMENTO'
-          DataSet = frxDBDsReport
-          DataSetName = 'frxDBDsReport'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[frxDBDsReport."DATAVENCIMENTO"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Memo8: TfrxMemoView
-          AllowVectorExport = True
-          Left = 106.322820000000000000
-          Width = 152.296138140000000000
-          Height = 18.897650000000000000
-          DataField = 'CATEGORIADESPESA'
-          DataSet = frxDBDsReport
-          DataSetName = 'frxDBDsReport'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[frxDBDsReport."CATEGORIADESPESA"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Memo9: TfrxMemoView
-          AllowVectorExport = True
-          Left = 262.398488140000000000
-          Width = 241.180850680000000000
-          Height = 18.897650000000000000
-          DataField = 'DESCRICAO'
-          DataSet = frxDBDsReport
-          DataSetName = 'frxDBDsReport'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[frxDBDsReport."DESCRICAO"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Memo10: TfrxMemoView
-          AllowVectorExport = True
-          Left = 503.579338820000000000
-          Width = 104.924527400000000000
-          Height = 18.897650000000000000
-          DataField = 'VALORAPAGAR'
-          DataSet = frxDBDsReport
-          DataSetName = 'frxDBDsReport'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2f'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[frxDBDsReport."VALORAPAGAR"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Shape1: TfrxShapeView
-          AllowVectorExport = True
-          Left = 1.000000000000000000
-          Top = 1.000000000000000000
-          Width = 22.677180000000000000
-          Height = 15.118120000000000000
-          Frame.Typ = []
-          Shape = skRoundRectangle
-        end
-        object Memo15: TfrxMemoView
-          AllowVectorExport = True
-          Left = 612.283860000000000000
-          Width = 104.924527400000000000
-          Height = 18.897650000000000000
-          DataField = 'VALORPAGO'
-          DataSet = frxDBDsReport
-          DataSetName = 'frxDBDsReport'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2f'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[frxDBDsReport."VALORPAGO"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Line1: TfrxLineView
-          AllowVectorExport = True
-          Left = -0.220470000000000000
-          Top = 18.897650000000000000
-          Width = 718.110700000000000000
-          Color = clBlack
-          Frame.Typ = [ftTop]
-        end
-      end
-      object PageFooter1: TfrxPageFooter
-        FillType = ftBrush
-        FillGap.Top = 0
-        FillGap.Left = 0
-        FillGap.Bottom = 0
-        FillGap.Right = 0
-        Frame.Typ = []
-        Height = 26.456710000000000000
-        Top = 249.448980000000000000
-        Width = 718.110700000000000000
-        object Memo11: TfrxMemoView
-          Align = baWidth
-          AllowVectorExport = True
-          Width = 718.110700000000000000
-          Frame.Typ = [ftTop]
-          Frame.Width = 2.000000000000000000
-        end
-        object Memo12: TfrxMemoView
-          AllowVectorExport = True
-          Top = 1.000000000000000000
-          Height = 22.677180000000000000
-          AutoWidth = True
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[Date] [Time]')
-        end
-        object Memo13: TfrxMemoView
-          Align = baRight
-          AllowVectorExport = True
-          Left = 642.520100000000000000
-          Top = 1.000000000000000000
-          Width = 75.590600000000000000
-          Height = 22.677180000000000000
-          Frame.Typ = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            'P'#225'gina [Page#]')
-        end
-      end
-    end
   end
 end

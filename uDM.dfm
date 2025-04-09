@@ -10,6 +10,7 @@ object DM: TDM
       'Password=123456'
       'Server=localhost'
       'DriverID=MySQL')
+    Connected = True
     LoginPrompt = False
     Transaction = Trans
     Left = 16
@@ -110,6 +111,7 @@ object DM: TDM
       '       ld.DATAVENCIMENTO,'
       '       ld.VALORAPAGAR,'
       '       ld.VALORPAGO,'
+      '       ld.VALORAPAGAR - ld.VALORPAGO as VALORDIFERENCA,'
       '       ld.IDCATEGORIA,'
       '       cd.DESCRICAO as categoriaDespesa,'
       '       ld.IDUSUARIO,'
@@ -160,6 +162,16 @@ object DM: TDM
       Origin = 'valorpago'
       DisplayFormat = '#,##0.00'
       Precision = 15
+      Size = 2
+    end
+    object qryDespesasVALORDIFERENCA: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VALORDIFERENCA'
+      Origin = 'VALORDIFERENCA'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = '#,##0.00'
+      Precision = 16
       Size = 2
     end
     object qryDespesasIDCATEGORIA: TIntegerField
@@ -304,7 +316,6 @@ object DM: TDM
       FieldName = 'ID'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object qryLoginLOGIN: TStringField
       FieldName = 'LOGIN'

@@ -9,7 +9,7 @@ uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
     Vcl.Menus, FireDAC.Stan.Intf, FireDAC.Stan.Option,
     FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
     FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
-    FireDAC.Comp.Client, frxClass, frxExportBaseDialog, frxExportPDF, frxDBSet;
+    FireDAC.Comp.Client;
 
 type
   TFeriados = (frPascoa, frCarnaval, frQuartaCinzas, frSextaSanta, frCorpusChristi);
@@ -24,6 +24,11 @@ type
   function CalculaPascoa(AAno: Word): TDateTime;
   function CalculaFeriado(AAno: Word; ATipo: TFeriados): TDateTime;
   function IncYear(const DateTime: TDateTime; NumberOfYear: Integer):TDateTime;
+  Function UltimoDiaMes(dData:TDate):String;
+  function StrZero(iNumero, iComp: Integer): String;
+  Function QtdeDiasUteis(cMes, cAno : String):String;
+  function IIf(Expressao: Variant; ParteTRUE, ParteFALSE: Variant): Variant;
+
 implementation
 
 uses uDM;
@@ -153,10 +158,10 @@ begin
   Result  :=  dDataMaior;
 end;
 
-function DiasUteis(dataini, datafin: string): integer;
+function DiasUteis(dataini, datafin: String): Integer;
 var
-	a,b,c:tdatetime;
-	ct,s:integer;
+	dDataFim, dDataIni, dDataFim2 : TDatetime;
+	nDiasUteis, s : Integer;
 begin
 	if StrToDate(DataFin) < StrtoDate(DataIni) then
 	begin
@@ -164,44 +169,44 @@ begin
 		exit;
 	end;
 
-	ct := 0;
-	s := 1;
-	a := strtodate(dataFin);
-	b := strtodate(dataIni);
+	nDiasUteis  := 0;
+	s           := 1;
+	dDataFim    := strtodate(dataFin);
+	dDataIni    := strtodate(dataIni);
 
-	if a > b then
+	if dDataFim > dDataIni then
 	begin
-		c := a;
-		a := b;
-		b := c;
+		dDataFim2 := dDataFim;
+		dDataFim  := dDataIni;
+		dDataIni  := dDataFim2;
 		s := 1;
 	end;
 
-	a := a + 1;
+	dDataFim := dDataFim + 1;
 
-	while (dayofweek(a)<>2) and (a <= b) do
+	while (dayofweek(dDataFim) <> 2) and (dDataFim <= dDataIni) do
 	begin
-		if dayofweek(a) in [2..6] then
-			inc(ct);
+		if dayofweek(dDataFim) in [2..6] then
+			inc(nDiasUteis);
 
-		a := a + 1;
+		dDataFim := dDataFim + 1;
 	end;
 
-	ct := ct + round((5*int((b-a)/7)));
-	a := a + (7*int((b-a)/7));
+	nDiasUteis := nDiasUteis + round((5 * int((dDataIni - dDataFim) / 7)));
+	dDataFim  := dDataFim + (7 * int((dDataIni - dDataFim) / 7));
 
-	while a <= b do
+	while dDataFim <= dDataIni do
 	begin
-		if dayofweek(a) in [2..6] then
-			inc(ct);
+		if dayofweek(dDataFim) in [2..6] then
+			inc(nDiasUteis);
 
-		a := a + 1;
+		dDataFim := dDataFim + 1;
 	end;
 
-	if ct < 0 then
-		ct := 0;
+	if nDiasUteis < 0 then
+		nDiasUteis := 0;
 
-	result := s*ct;
+	result := s * nDiasUteis;
 end;
 
 function CalculaPascoa(AAno: Word): TDateTime;
@@ -215,28 +220,38 @@ begin
   R3 := AAno mod 7;
   R4 := (19 * R1 + 24) mod 30;
   R5 := (6 * R4 + 4 * R3 + 2 * R2 + 5) mod 7;
+
   FPascoa := EncodeDate(AAno, 3, 22);
   FPascoa := FPascoa + R4 + R5;
+
   DecodeDate(FPascoa, VJ, VM, VD);
+
   case VD of
     26 : FPascoa := EncodeDate(Aano, 4, 19);
-    25 : if R1 > 10 then
-           FPascoa := EncodeDate(AAno, 4, 18);
+    25 :
+      Begin
+        if R1 > 10 then
+          FPascoa := EncodeDate(AAno, 4, 18);
+      End;
   end;
+
   Result:= FPascoa;
 end;
 
 function CalculaFeriado(AAno: Word; ATipo: TFeriados): TDateTime;
 var
   Aux: TDateTime;
+
 begin
   Aux := CalculaPascoa(AAno);
+
   Case ATipo of
     frCarnaval : Aux := Aux - 47;
     frQuartaCinzas : Aux := Aux - 46;
     frSextaSanta : Aux := Aux - 2;
     frCorpusChristi: Aux := Aux + 60;
   end;
+
   Result := Aux;
 end;
 
@@ -250,5 +265,58 @@ begin
   Result := EncodeDate(Year, Month, Day);
   ReplaceTime(Result, DateTime);
 end;
+
+Function UltimoDiaMes(dData:TDate):String;
+var
+  cMes, cAno, cData : string;
+  cUltimoDiaDoMes : String;
+
+begin
+  cData :=  FormatDateTime('dd/mm/yyyy', dData);
+  cMes  :=  Copy( cData, 4, 2 );
+  cAno  :=  Copy( cData, 7, 4 );
+
+  if Pos( cMes, '01 03 05 07 08 10 12' ) > 0 then
+    cUltimoDiaDoMes := '31'
+  else if cMes <> '02' then
+    cUltimoDiaDoMes := '30'
+  else if ( StrToInt( cAno ) mod 4 ) = 0 then
+    cUltimoDiaDoMes := '29'
+  else
+    cUltimoDiaDoMes := '28';
+
+  Result := cUltimoDiaDoMes;
+end;
+
+Function QtdeDiasUteis(cMes, cAno : String):String;
+var
+  nPrimeiroDia, nUltimoDia : Integer;
+  dDataIni, dDataFim : TDate;
+  nQtdeDiasUteis : Integer;
+
+begin
+  nPrimeiroDia  :=  1;
+  dDataIni      := StrToDate('01/' + cMes + '/' + cAno);
+
+  nUltimoDia    :=  StrToInt(UltimoDiaMes(dDataIni));
+  dDataFim      :=  StrToDate(StrZero(nUltimoDia, 2) + '/' + cMes + '/' + cAno);
+
+  nQtdeDiasUteis  :=  DiasUteis(FormatDateTime('dd/mm/yyyy', dDataIni), FormatDateTime('dd/mm/yyyy', dDataFim));
+  result          :=  Trim(IntToStr(nQtdeDiasUteis));
+end;
+
+function StrZero(iNumero, iComp: Integer): String;
+begin
+  Result := StringOfChar('0', iComp - Length(IntToStr(iNumero))) +
+            IntToStr(iNumero);
+end;
+
+function IIf(Expressao: Variant; ParteTRUE, ParteFALSE: Variant): Variant;
+ begin
+   if Expressao then
+      Result := ParteTRUE
+   else
+      Result := ParteFALSE;
+ end;
 
 end.

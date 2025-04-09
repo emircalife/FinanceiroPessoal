@@ -68,6 +68,7 @@ type
     qryUsuariosNIVELDEACESSO: TStringField;
     qryDespesasOBSERVACOES: TStringField;
     qryReceitasOBSERVACOES: TStringField;
+    qryDespesasVALORDIFERENCA: TBCDField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

@@ -9,8 +9,7 @@ uses
   Vcl.Mask, Vcl.DBCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, frxClass, frxExportBaseDialog, frxExportPDF, frxDBSet,
-  FMTBcd;
+  FireDAC.Comp.Client, FMTBcd, ShellAPI;
 
 type
   TfrmMain = class(TForm)
@@ -56,10 +55,6 @@ type
     IntegerField1: TIntegerField;
     StringField1: TStringField;
     dslkpCategoriasReceita: TDataSource;
-    btnCalendario: TBitBtn;
-    frxPDFExport: TfrxPDFExport;
-    frxDBDsReport: TfrxDBDataset;
-    frxRelDespesadDoMes: TfrxReport;
     N1: TMenuItem;
     Usurios1: TMenuItem;
     lblTotalDespesas: TLabel;
@@ -111,6 +106,11 @@ type
     lblValorFaltaPagar: TLabel;
     lblObservacoesReceitas: TLabel;
     edtObservacoesReceitas: TDBMemo;
+    Aplicativos1: TMenuItem;
+    Calculadora1: TMenuItem;
+    Calendrio1: TMenuItem;
+    lblDescrDiasUteisNoMes: TLabel;
+    lblDiasUteisNoMes: TLabel;
     procedure Despesas1Click(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure Receitas1Click(Sender: TObject);
@@ -142,8 +142,12 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure Despesas2Click(Sender: TObject);
     procedure Despesas4Click(Sender: TObject);
+    procedure Calculadora1Click(Sender: TObject);
+    procedure Calendrio1Click(Sender: TObject);
   private
     { Private declarations }
+    cMesAtual, cAnoAtual, cMesAnoAtual : String;
+
     procedure CarregaComboMesAno;
     function StrZero(iNumero, iComp: Integer): String;
     procedure setTotaisDespesas(cMes, cAno : String);
@@ -153,8 +157,9 @@ type
     Procedure FiltrarReceitasEDespesas(cMesAtual, cAnoAtual:String);
   public
     { Public declarations }
-    nIdUsuario   : Integer;
-    cNomeUsuario : String;
+    nIdUsuario     : Integer;
+    cNomeUsuario   : String;
+    cQtdeDiasUteis : String;
   end;
 
 var
@@ -210,6 +215,8 @@ begin
     if uFuncoes.MessageDlgDefault('Confirma a Exclusão?',mtWarning,[mbNo, mbYes],
                                                           0, mrNo) = mrYes then
     begin
+      cMesAnoAtual  := cboMesAno.Items[cboMesAno.ItemIndex];
+
       DM.qryDespesas.Delete;
 
       CarregaComboMesAno;
@@ -423,7 +430,19 @@ begin
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
+var
+  nDia, nMes, nAno : Word;
+
 begin
+  DecodeDate(date, nAno, nMes, nDia);
+
+  cMesAtual     := StrZero(nMes, 2);
+  cAnoAtual     := StrZero(nAno, 4);
+  cMesAnoAtual  := cMesAtual + '/' + cAnoAtual;
+
+  cQtdeDiasUteis := uFuncoes.QtdeDiasUteis(cMesAtual, cAnoAtual);
+
+  lblDiasUteisNoMes.Caption := cQtdeDiasUteis;
 
   if DM.qryCategoriasReceita.Active = false then
     DM.qryCategoriasReceita.Active := true;
@@ -565,16 +584,23 @@ begin
   FiltrarReceitasEDespesas('','');
 end;
 
+procedure TfrmMain.Calculadora1Click(Sender: TObject);
+begin
+  ShellExecute(0, nil, PChar('CALC.EXE'), nil, nil, SW_ShowNORMAL);
+end;
+
+procedure TfrmMain.Calendrio1Click(Sender: TObject);
+begin
+  frmCalendario := TfrmCalendario.Create(self);
+  frmCalendario.ShowModal;
+  FreeAndNil(frmCalendario);
+end;
+
 procedure TfrmMain.CarregaComboMesAno;
 var
   QryListagemCombo : TFDQuery;
-  cMes, cAno, cMesAtual, cAnoAtual, cMesAnoAtual : String;
-  nDia, nMes, nAno : Word;
+  cMes, cAno : String;
 begin
-  DecodeDate(date, nAno, nMes, nDia);
-  cMesAtual     := StrZero(nMes, 2);
-  cAnoAtual     := StrZero(nAno, 4);
-  cMesAnoAtual  := cMesAtual + '/' + cAnoAtual;
 
   cboMesAno.Items.Clear;
   cboMesAno.Items.Add('TODOS');
@@ -662,23 +688,12 @@ begin
 	  cAno   := Copy(mesAno, 4, 6);
   end;
 
+  cQtdeDiasUteis := uFuncoes.QtdeDiasUteis(cMes, cAno);
+
+  lblDiasUteisNoMes.Caption := cQtdeDiasUteis;
+
   FiltrarReceitasEDespesas(cMes, cAno);
 
-{
-	if UpperCase(mesAno) <> 'TODOS' then
-	begin
-    cFiltroDesp := ' MONTH(LD.DATAVENCIMENTO)=' + QuotedStr(cMes) + ' AND YEAR(LD.DATAVENCIMENTO)=' + QuotedStr(cAno);
-    cFiltroRec  := ' MONTH(LR.DATARECEBIMENTO)=' + QuotedStr(cMes) + ' AND YEAR(LR.DATARECEBIMENTO)=' + QuotedStr(cAno);
-
-    dm.qryDespesas.Filtered := false;
-    dm.qryDespesas.Filter   := cFiltroDesp;
-    dm.qryDespesas.Filtered := true;
-
-    dm.qryReceitas.Filtered := false;
-    dm.qryReceitas.Filter   := cFiltroRec;
-    dm.qryReceitas.Filtered := true;
-	end;
-}
 end;
 
 procedure TfrmMain.chkMostrarDespesasJaPagasClick(Sender: TObject);
@@ -783,8 +798,8 @@ begin
 
   if (trim(cMes) <> '') AND (trim(cAno) <> '') then
   begin
-    QryTotaisReceitas.SQL.Add('   ,MONTH(LR.DATARECEBIMENTO) AS MES, ');
-    QryTotaisReceitas.SQL.Add('    YEAR(LR.DATARECEBIMENTO) AS ANO   ');
+    QryTotaisReceitas.SQL.Add('   ,MONTH(LR.DATAARECEBER) AS MES, ');
+    QryTotaisReceitas.SQL.Add('    YEAR(LR.DATAARECEBER) AS ANO   ');
   end;
 
   QryTotaisReceitas.SQL.Add('FROM LANCAMENTOSRECEITA LR                           ');
@@ -793,8 +808,8 @@ begin
 
   if (trim(cMes) <> '') AND (trim(cAno) <> '') then
   begin
-    QryTotaisReceitas.SQL.Add('  AND MONTH(LR.DATARECEBIMENTO)=:PMes ');
-    QryTotaisReceitas.SQL.Add('  AND YEAR(LR.DATARECEBIMENTO) =:PAno ');
+    QryTotaisReceitas.SQL.Add('  AND MONTH(LR.DATAARECEBER)=:PMes ');
+    QryTotaisReceitas.SQL.Add('  AND YEAR(LR.DATAARECEBER) =:PAno ');
   end;
 
   if nIdUsuario > 0 then
@@ -866,26 +881,27 @@ begin
 
   if (trim(cMes) <> '') AND (trim(cAno) <> '') then
   begin
-    DM.qryReceitas.SQL.Add('  AND MONTH(LR.DATARECEBIMENTO)=:PMes  ');
-    DM.qryReceitas.SQL.Add('  AND YEAR(LR.DATARECEBIMENTO) =:PAno  ');
-  end;
+    DM.qryReceitas.SQL.Add('  AND MONTH(LR.DATAARECEBER)=:PMes  ');
+    DM.qryReceitas.SQL.Add('  AND YEAR(LR.DATAARECEBER) =:PAno  ');
+      end;
 
   if nIdUsuario > 0 then
   begin
-    DM.qryReceitas.SQL.Add('  AND LR.IDUSUARIO =:PIDUSUARIO                     ');
+    DM.qryReceitas.SQL.Add('  AND LR.IDUSUARIO =:PIDUSUARIO     ');
     DM.qryReceitas.ParamByName('PIDUSUARIO').AsInteger := nIdUsuario;
   end;
 
   if (trim(cMes) <> '') AND (trim(cAno) <> '') then
   begin
-    DM.qryReceitas.SQL.Add('ORDER BY YEAR(LR.DATARECEBIMENTO) ASC, ');
-    DM.qryReceitas.SQL.Add('         MONTH(LR.DATARECEBIMENTO) ASC,');
-    DM.qryReceitas.SQL.Add('         DAY(LR.DATARECEBIMENTO) ASC   ');
+    DM.qryReceitas.SQL.Add('ORDER BY YEAR(LR.DATAARECEBER) ASC,  ');
+    DM.qryReceitas.SQL.Add('         MONTH(LR.DATAARECEBER) ASC, ');
+    DM.qryReceitas.SQL.Add('         DAY(LR.DATAARECEBER) ASC,   ');
+    DM.qryReceitas.SQL.Add('         LR.DESCRICAO ASC            ');
 
     DM.qryReceitas.ParamByName('PMes').AsAnsiString := cMes;
     DM.qryReceitas.ParamByName('PAno').AsAnsiString := cAno;
   end else
-    DM.qryReceitas.SQL.Add('ORDER BY LR.DATARECEBIMENTO ASC                     ');
+    DM.qryReceitas.SQL.Add('ORDER BY LR.DATAARECEBER ASC                     ');
 
   DM.qryReceitas.Open;
 
@@ -914,6 +930,7 @@ begin
   DM.qryDespesas.SQL.Add('       LD.DATAVENCIMENTO,                               ');
   DM.qryDespesas.SQL.Add('       LD.VALORAPAGAR,                                  ');
   DM.qryDespesas.SQL.Add('       LD.VALORPAGO,                                    ');
+  DM.qryDespesas.SQL.Add('       ld.VALORAPAGAR - ld.VALORPAGO as VALORDIFERENCA, ');
   DM.qryDespesas.SQL.Add('       LD.IDCATEGORIA,                                  ');
   DM.qryDespesas.SQL.Add('       CD.DESCRICAO as categoriaDespesa,                ');
   DM.qryDespesas.SQL.Add('       LD.IDUSUARIO,                                    ');
@@ -946,7 +963,8 @@ begin
   begin
     DM.qryDespesas.SQL.Add('ORDER BY YEAR(LD.DATAVENCIMENTO) ASC,  ');
     DM.qryDespesas.SQL.Add('         MONTH(LD.DATAVENCIMENTO) ASC, ');
-    DM.qryDespesas.SQL.Add('         DAY(LD.DATAVENCIMENTO) ASC    ');
+    DM.qryDespesas.SQL.Add('         DAY(LD.DATAVENCIMENTO) ASC,   ');
+    DM.qryDespesas.SQL.Add('         LD.DESCRICAO ASC              ');
 
     DM.qryDespesas.ParamByName('PMes').AsAnsiString := cMes;
     DM.qryDespesas.ParamByName('PAno').AsAnsiString := cAno;
