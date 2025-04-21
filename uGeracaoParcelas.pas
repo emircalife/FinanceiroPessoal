@@ -43,8 +43,15 @@ type
     edtDespesa: TEdit;
     cboTipoParcelamento: TComboBox;
     lblTipoParcelamento: TLabel;
-    edtDTVencimento: TMaskEdit;
     rgFormaParcelas: TRadioGroup;
+    lblObservacoesDespesas: TLabel;
+    memObservacoes: TMemo;
+    cdsDespesasobservacoes: TStringField;
+    chkDespesaFixa: TCheckBox;
+    cdsDespesasdespesaFixa: TBooleanField;
+    cdsDespesasnParc: TIntegerField;
+    cdsDespesastotParc: TIntegerField;
+    edtDTVencimento: TMaskEdit;
     procedure btnSairClick(Sender: TObject);
     procedure btnGerarParcelasClick(Sender: TObject);
     procedure edtValorAPagarExit(Sender: TObject);
@@ -167,6 +174,8 @@ begin
         DM.qryDespesasIDCATEGORIA.Value         := cdsDespesascategoria.Value;
         DM.qryDespesasVALORAPAGAR.Value         := cdsDespesasvalorAPagar.Value;
         DM.qryDespesasDESCRICAO.Value           := trim(cdsDespesasdescricao.Value);
+        DM.qryDespesasOBSERVACOES.Value         := trim(cdsDespesasobservacoes.Value);
+        DM.qryDespesasDESPESAFIXA.Value         := uFuncoes.IIf(cdsDespesasDespesaFixa.Value = false, 0, 1);
 
         DM.qryDespesas.Post;
 
@@ -234,10 +243,12 @@ var
   lnSomaValoresParcelas, lnDiferencaParcelas: double;
   lcDescrCategoriaDespesa : String;
   lnAcumuladosParcela     : double;
+  llDespesaFixa           : Boolean;
 
 begin
   lnCodCategoriaDespesa   := lkpCategoriaDespesa.KeyValue;
   lcDescrCategoriaDespesa := trim(lkpCategoriaDespesa.Text);
+  llDespesaFixa           := uFuncoes.IIf(chkDespesaFixa.Checked, TRUE, FALSE);
 
   cdsDespesas.EmptyDataSet;
 
@@ -271,6 +282,10 @@ begin
     cdsDespesas.FieldByName('categoria').AsInteger       := lnCodCategoriaDespesa;
     cdsDespesas.FieldByName('categoriaDespesa').AsString := lcDescrCategoriaDespesa;
     cdsDespesas.FieldByName('descricao').AsString        := trim(edtDespesa.Text);
+    cdsDespesas.FieldByName('observacoes').AsString      := trim(memObservacoes.Text);
+    cdsDespesas.FieldByName('despesaFixa').AsBoolean     := llDespesaFixa;
+    cdsDespesas.FieldByName('nParc').AsInteger           := lnCont;
+    cdsDespesas.FieldByName('totParc').AsInteger         := StrToInt(edtQtdeParcelas.Text);
 
     if lnValorPrimeiraParcela <> lnValorParcela then
     begin
@@ -313,6 +328,7 @@ var
   lnSomaValoresParcelas, lnDiferencaParcelas: double;
   lcDescrCategoriaDespesa : String;
   lnAcumuladosParcela     : double;
+  llDespesaFixa           : Boolean;
 
 begin
   lnCodCategoriaDespesa   := lkpCategoriaDespesa.KeyValue;
@@ -323,6 +339,7 @@ begin
   lnQtdeParcelas          := StrToInt(edtQtdeParcelas.Text);
   ldDtVencimento          := StrToDate(edtDTVencimento.Text);
   lnValorParcela          := StrToFloat(edtValorAPagar.Text);
+  llDespesaFixa           := uFuncoes.IIf(chkDespesaFixa.Checked, TRUE, FALSE);
 
   cdsDespesas.Cancel;
 
@@ -334,6 +351,10 @@ begin
     cdsDespesas.FieldByName('categoriaDespesa').AsString := lcDescrCategoriaDespesa;
     cdsDespesas.FieldByName('descricao').AsString        := trim(edtDespesa.Text);
     cdsDespesas.FieldByName('valorAPagar').AsFloat       := RoundTo(lnValorParcela, -3);
+    cdsDespesas.FieldByName('observacoes').AsString      := trim(memObservacoes.Text);
+    cdsDespesas.FieldByName('despesaFixa').AsBoolean     := llDespesaFixa;
+    cdsDespesas.FieldByName('nParc').AsInteger           := lnCont;
+    cdsDespesas.FieldByName('totParc').AsInteger         := StrToInt(edtQtdeParcelas.Text);
 
     cdsDespesas.Post;
 

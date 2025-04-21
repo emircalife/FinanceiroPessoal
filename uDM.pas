@@ -69,6 +69,11 @@ type
     qryDespesasOBSERVACOES: TStringField;
     qryReceitasOBSERVACOES: TStringField;
     qryDespesasVALORDIFERENCA: TBCDField;
+    qryExportDespesasExcel: TFDQuery;
+    qryDespesasDESPESAFIXA: TShortintField;
+    qryDespesasnParc: TIntegerField;
+    qryDespesastotParc: TIntegerField;
+    qryDespesasarquivoAnexo: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

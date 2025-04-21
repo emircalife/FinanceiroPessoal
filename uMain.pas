@@ -9,7 +9,7 @@ uses
   Vcl.Mask, Vcl.DBCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, FMTBcd, ShellAPI;
+  FireDAC.Comp.Client, FMTBcd, ShellAPI, ComObj, Clipbrd;
 
 type
   TfrmMain = class(TForm)
@@ -111,6 +111,14 @@ type
     Calendrio1: TMenuItem;
     lblDescrDiasUteisNoMes: TLabel;
     lblDiasUteisNoMes: TLabel;
+    chkDespesaFixa: TDBCheckBox;
+    Exportar1: TMenuItem;
+    ParaExcellPlanilhadoAno1: TMenuItem;
+    lblArquivoAnexo: TLabel;
+    edtArquivoAnexo: TDBEdit;
+    btnArquivoAnexo: TBitBtn;
+    odArquivoAnexo: TOpenDialog;
+    btnAbirArquivo: TBitBtn;
     procedure Despesas1Click(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure Receitas1Click(Sender: TObject);
@@ -144,6 +152,9 @@ type
     procedure Despesas4Click(Sender: TObject);
     procedure Calculadora1Click(Sender: TObject);
     procedure Calendrio1Click(Sender: TObject);
+    procedure ParaExcellPlanilhadoAno1Click(Sender: TObject);
+    procedure btnArquivoAnexoClick(Sender: TObject);
+    procedure btnAbirArquivoClick(Sender: TObject);
   private
     { Private declarations }
     cMesAtual, cAnoAtual, cMesAnoAtual : String;
@@ -170,7 +181,20 @@ implementation
 {$R *.dfm}
 
 uses uCategoriasDespesa, uDM, uCategoriasReceita, uGeracaoParcelas, uCalendario,
-  uFuncoes, uLogin, uUsuarios, uImprDespesas;
+  uFuncoes, uLogin, uUsuarios, uImprDespesas, uExpoPlanExelAnual;
+
+procedure TfrmMain.btnAbirArquivoClick(Sender: TObject);
+var
+  Pdir: Pchar;
+begin
+  if FileExists(trim(dm.qryDespesas.FieldByName('arquivoAnexo').AsString)) then
+  begin
+    GetMem(pDir, 256);
+    StrPCopy(pDir, trim(dm.qryDespesas.FieldByName('arquivoAnexo').AsString)); {Aqui vc coloca o caminho + o nome do arquivo}
+    ShellExecute(0, nil, PChar(trim(dm.qryDespesas.FieldByName('arquivoAnexo').AsString)), nil, Pdir, SW_NORMAL);
+    FreeMem(pdir,256);
+  end;
+end;
 
 procedure TfrmMain.btnAlterarDespesaClick(Sender: TObject);
 begin
@@ -188,6 +212,18 @@ begin
     DM.qryReceitas.Edit;
     edtDTAreceber.setFocus;
   end;
+end;
+
+procedure TfrmMain.btnArquivoAnexoClick(Sender: TObject);
+var
+  Stream : TStream;
+begin
+  if dm.qryDespesas.State in [dsEdit, dsInsert] then
+    if odArquivoAnexo.Execute() then
+      if FileExists(odArquivoAnexo.FileName) then
+      Begin
+        dm.qryDespesas.FieldByName('arquivoAnexo').AsString := trim(odArquivoAnexo.FileName);
+      End;
 end;
 
 procedure TfrmMain.btnCalendarioClick(Sender: TObject);
@@ -293,7 +329,7 @@ begin
     end else
       nRecNo := DM.qryDespesas.RecNo;
 
-    DM.qryDespesasIDUSUARIO.AsInteger := nIdUsuario;
+    DM.qryDespesasIDUSUARIO.AsInteger   := nIdUsuario;
 
     DM.qryDespesas.Post;
 
@@ -565,6 +601,13 @@ begin
         'Total de Receitas Selecionadas', MB_OK + MB_ICONINFORMATION);
   end;
 
+end;
+
+procedure TfrmMain.ParaExcellPlanilhadoAno1Click(Sender: TObject);
+begin
+  frmExpoPlanExelAnual := TfrmExpoPlanExelAnual.Create(self);
+  frmExpoPlanExelAnual.ShowModal;
+  FreeAndNil(frmExpoPlanExelAnual);
 end;
 
 procedure TfrmMain.Receitas1Click(Sender: TObject);
@@ -935,7 +978,11 @@ begin
   DM.qryDespesas.SQL.Add('       CD.DESCRICAO as categoriaDespesa,                ');
   DM.qryDespesas.SQL.Add('       LD.IDUSUARIO,                                    ');
   DM.qryDespesas.SQL.Add('       LD.DATAPAGAMENTO,                                ');
-  DM.qryDespesas.SQL.Add('       LD.OBSERVACOES                                   ');
+  DM.qryDespesas.SQL.Add('       LD.OBSERVACOES,                                  ');
+  DM.qryDespesas.SQL.Add('       LD.DESPESAFIXA,                                  ');
+  DM.qryDespesas.SQL.Add('       LD.NPARC,                                        ');
+  DM.qryDespesas.SQL.Add('       LD.TOTPARC,                                      ');
+  DM.qryDespesas.SQL.Add('       LD.ARQUIVOANEXO                                  ');
   DM.qryDespesas.SQL.Add('FROM lancamentosdespesa LD                              ');
   DM.qryDespesas.SQL.Add('INNER JOIN CATEGORIASDESPESA CD ON LD.idcategoria=CD.id ');
   DM.qryDespesas.SQL.Add('WHERE 1=1                                               ');
@@ -978,7 +1025,7 @@ end;
 
 Procedure TfrmMain.FiltrarReceitasEDespesas(cMesAtual, cAnoAtual:String);
 var
-  mesAno, cMes, cAno : String;
+  mesAno, cDia, cMes, cAno : String;
 begin
   if (cMesAtual = '') AND (cAnoAtual = '') then
   begin

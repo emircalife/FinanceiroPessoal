@@ -36,9 +36,9 @@ object frmMain: TfrmMain
   object lblDescrDiasUteisNoMes: TLabel
     Left = 1002
     Top = 16
-    Width = 99
+    Width = 102
     Height = 15
-    Caption = 'Dias '#250'teis no m'#234's:'
+    Caption = 'Dias '#250'teis no m'#234's: '
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -12
@@ -66,16 +66,16 @@ object frmMain: TfrmMain
     Left = 8
     Top = 45
     Width = 1119
-    Height = 428
+    Height = 437
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = '   Despesas   '
     TabOrder = 2
     DesignSize = (
       1119
-      428)
+      437)
     object lblTotalDespesas: TLabel
       Left = 896
-      Top = 192
+      Top = 179
       Width = 212
       Height = 15
       Alignment = taRightJustify
@@ -88,11 +88,10 @@ object frmMain: TfrmMain
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 900
     end
     object Label5: TLabel
       Left = 181
-      Top = 194
+      Top = 181
       Width = 41
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -100,7 +99,7 @@ object frmMain: TfrmMain
     end
     object Shape3: TShape
       Left = 158
-      Top = 192
+      Top = 179
       Width = 17
       Height = 17
       Anchors = [akLeft, akBottom]
@@ -109,7 +108,7 @@ object frmMain: TfrmMain
     end
     object Label4: TLabel
       Left = 83
-      Top = 194
+      Top = 181
       Width = 59
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -117,7 +116,7 @@ object frmMain: TfrmMain
     end
     object Shape2: TShape
       Left = 60
-      Top = 192
+      Top = 179
       Width = 17
       Height = 17
       Anchors = [akLeft, akBottom]
@@ -126,7 +125,7 @@ object frmMain: TfrmMain
     end
     object Label3: TLabel
       Left = 27
-      Top = 194
+      Top = 181
       Width = 27
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -134,7 +133,7 @@ object frmMain: TfrmMain
     end
     object Shape1: TShape
       Left = 4
-      Top = 192
+      Top = 179
       Width = 17
       Height = 17
       Anchors = [akLeft, akBottom]
@@ -143,7 +142,7 @@ object frmMain: TfrmMain
     end
     object lblVencimento: TLabel
       Left = 10
-      Top = 239
+      Top = 226
       Width = 80
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -152,7 +151,7 @@ object frmMain: TfrmMain
     end
     object lblCategoriaDespesa: TLabel
       Left = 207
-      Top = 239
+      Top = 226
       Width = 51
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -161,7 +160,7 @@ object frmMain: TfrmMain
     end
     object Label6: TLabel
       Left = 784
-      Top = 229
+      Top = 216
       Width = 78
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -170,7 +169,7 @@ object frmMain: TfrmMain
     end
     object lblValorPago: TLabel
       Left = 784
-      Top = 263
+      Top = 249
       Width = 43
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -179,7 +178,7 @@ object frmMain: TfrmMain
     end
     object lblValorAPagar: TLabel
       Left = 610
-      Top = 263
+      Top = 249
       Width = 55
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -188,7 +187,7 @@ object frmMain: TfrmMain
     end
     object lblDespesa: TLabel
       Left = 10
-      Top = 262
+      Top = 249
       Width = 43
       Height = 15
       Anchors = [akLeft, akBottom]
@@ -197,18 +196,28 @@ object frmMain: TfrmMain
     end
     object lblObservacoesDespesas: TLabel
       Left = 10
-      Top = 287
+      Top = 296
       Width = 67
       Height = 15
       Anchors = [akLeft, akBottom]
       Caption = 'Observa'#231#245'es'
       FocusControl = edtObservacoesDespesas
+      ExplicitTop = 287
+    end
+    object lblArquivoAnexo: TLabel
+      Left = 11
+      Top = 270
+      Width = 78
+      Height = 15
+      Anchors = [akLeft, akBottom]
+      Caption = 'Arquivo Anexo'
+      FocusControl = edtDespesa
     end
     object grdDespesas: TDBGrid
       Left = 2
       Top = 17
       Width = 1115
-      Height = 169
+      Height = 160
       TabStop = False
       Align = alTop
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -284,8 +293,8 @@ object frmMain: TfrmMain
         end>
     end
     object rgMostrarDespesas: TRadioGroup
-      Left = 262
-      Top = 191
+      Left = 264
+      Top = 179
       Width = 419
       Height = 36
       Anchors = [akLeft, akBottom]
@@ -301,7 +310,7 @@ object frmMain: TfrmMain
     end
     object edtDTVencimento: TDBEdit
       Left = 97
-      Top = 234
+      Top = 221
       Width = 97
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -311,7 +320,7 @@ object frmMain: TfrmMain
     end
     object lkpCategoriaDespesa: TDBLookupComboBox
       Left = 264
-      Top = 234
+      Top = 221
       Width = 333
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -324,7 +333,7 @@ object frmMain: TfrmMain
     end
     object edtDTPagamento: TDBEdit
       Left = 873
-      Top = 226
+      Top = 213
       Width = 97
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -334,7 +343,7 @@ object frmMain: TfrmMain
     end
     object edtValorPago: TDBEdit
       Left = 873
-      Top = 255
+      Top = 242
       Width = 97
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -344,7 +353,7 @@ object frmMain: TfrmMain
     end
     object edtValorAPagar: TDBEdit
       Left = 682
-      Top = 255
+      Top = 242
       Width = 97
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -354,7 +363,7 @@ object frmMain: TfrmMain
     end
     object edtDespesa: TDBEdit
       Left = 97
-      Top = 259
+      Top = 246
       Width = 500
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -364,23 +373,23 @@ object frmMain: TfrmMain
     end
     object edtObservacoesDespesas: TDBMemo
       Left = 97
-      Top = 284
+      Top = 296
       Width = 873
-      Height = 43
+      Height = 40
       Anchors = [akLeft, akBottom]
       DataField = 'OBSERVACOES'
       DataSource = dsDesepsas
       MaxLength = 255
-      TabOrder = 8
+      TabOrder = 11
     end
     object pnlBotoesDespesas: TPanel
       AlignWithMargins = True
       Left = 5
-      Top = 333
+      Top = 342
       Width = 1109
       Height = 90
       Align = alBottom
-      TabOrder = 9
+      TabOrder = 12
       object btnNovoDespesa: TBitBtn
         AlignWithMargins = True
         Left = 4
@@ -1013,69 +1022,118 @@ object frmMain: TfrmMain
         end
       end
     end
+    object chkDespesaFixa: TDBCheckBox
+      Left = 784
+      Top = 179
+      Width = 97
+      Height = 17
+      Anchors = [akLeft, akBottom]
+      Caption = 'Despesa Fixa'
+      DataField = 'DESPESAFIXA'
+      DataSource = dsDesepsas
+      TabOrder = 13
+      ValueChecked = '1'
+      ValueUnchecked = '0'
+    end
+    object edtArquivoAnexo: TDBEdit
+      Left = 97
+      Top = 271
+      Width = 500
+      Height = 23
+      Anchors = [akLeft, akBottom]
+      DataField = 'arquivoAnexo'
+      DataSource = dsDesepsas
+      ReadOnly = True
+      TabOrder = 8
+    end
+    object btnArquivoAnexo: TBitBtn
+      Left = 598
+      Top = 271
+      Width = 23
+      Height = 23
+      Anchors = [akLeft, akBottom]
+      Caption = '...'
+      TabOrder = 9
+      OnClick = btnArquivoAnexoClick
+    end
+    object btnAbirArquivo: TBitBtn
+      Left = 625
+      Top = 270
+      Width = 23
+      Height = 23
+      Anchors = [akLeft, akBottom]
+      Caption = '~>'
+      TabOrder = 10
+      OnClick = btnAbirArquivoClick
+    end
   end
   object grpReceitas: TGroupBox
     AlignWithMargins = True
     Left = 8
-    Top = 479
+    Top = 488
     Width = 1119
-    Height = 343
+    Height = 334
     Anchors = [akLeft, akRight, akBottom]
     Caption = '   Receitas   '
     TabOrder = 3
     DesignSize = (
       1119
-      343)
+      334)
     object lblDTRecebimento: TLabel
       Left = 784
-      Top = 157
+      Top = 148
       Width = 87
       Height = 15
       Anchors = [akLeft, akBottom]
       Caption = 'DT Recebimento'
       FocusControl = edtDTRecebimento
+      ExplicitTop = 157
     end
     object lblCategoriaReceita: TLabel
       Left = 207
-      Top = 156
+      Top = 147
       Width = 51
       Height = 15
       Anchors = [akLeft, akBottom]
       Caption = 'Categoria'
       FocusControl = lkpCategoriaReceita
+      ExplicitTop = 156
     end
     object lblReceita: TLabel
       Left = 7
-      Top = 183
+      Top = 174
       Width = 38
       Height = 15
       Anchors = [akLeft, akBottom]
       Caption = 'Receita'
       FocusControl = edtReceita
+      ExplicitTop = 183
     end
     object Label1: TLabel
       Left = 610
-      Top = 183
+      Top = 174
       Width = 67
       Height = 15
       Anchors = [akLeft, akBottom]
       Caption = 'R$ a Receber'
       FocusControl = edtValorAReceber
+      ExplicitTop = 183
     end
     object Label2: TLabel
       Left = 797
-      Top = 183
+      Top = 174
       Width = 65
       Height = 15
       Anchors = [akLeft, akBottom]
       Caption = 'R$ Recebido'
       FocusControl = edtValorRecebido
+      ExplicitTop = 183
     end
     object lblTotalReceitas: TLabel
       Left = 900
       Top = 132
       Width = 208
-      Height = 16
+      Height = 13
       Alignment = taRightJustify
       Anchors = [akLeft, akTop, akRight, akBottom]
       AutoSize = False
@@ -1086,7 +1144,6 @@ object frmMain: TfrmMain
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 212
     end
     object lblDTAReceber: TLabel
       Left = 6
@@ -1177,7 +1234,7 @@ object frmMain: TfrmMain
     end
     object pnlBotoesReceitas: TPanel
       Left = 2
-      Top = 263
+      Top = 254
       Width = 1115
       Height = 78
       Align = alBottom
@@ -1927,7 +1984,7 @@ object frmMain: TfrmMain
     end
     object edtDTRecebimento: TDBEdit
       Left = 873
-      Top = 151
+      Top = 142
       Width = 97
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -1937,7 +1994,7 @@ object frmMain: TfrmMain
     end
     object lkpCategoriaReceita: TDBLookupComboBox
       Left = 264
-      Top = 153
+      Top = 144
       Width = 333
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -1950,7 +2007,7 @@ object frmMain: TfrmMain
     end
     object edtReceita: TDBEdit
       Left = 97
-      Top = 180
+      Top = 171
       Width = 500
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -1960,7 +2017,7 @@ object frmMain: TfrmMain
     end
     object edtValorAReceber: TDBEdit
       Left = 682
-      Top = 180
+      Top = 171
       Width = 97
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -1970,7 +2027,7 @@ object frmMain: TfrmMain
     end
     object edtValorRecebido: TDBEdit
       Left = 873
-      Top = 180
+      Top = 171
       Width = 97
       Height = 23
       Anchors = [akLeft, akBottom]
@@ -2064,6 +2121,13 @@ object frmMain: TfrmMain
         OnClick = Calendrio1Click
       end
     end
+    object Exportar1: TMenuItem
+      Caption = 'Exportar...'
+      object ParaExcellPlanilhadoAno1: TMenuItem
+        Caption = 'Para Excell Planilha do Ano'
+        OnClick = ParaExcellPlanilhadoAno1Click
+      end
+    end
   end
   object dsDesepsas: TDataSource
     DataSet = DM.qryDespesas
@@ -2128,5 +2192,9 @@ object frmMain: TfrmMain
     DataSet = qrylkpCategoriasReceita
     Left = 720
     Top = 552
+  end
+  object odArquivoAnexo: TOpenDialog
+    Left = 544
+    Top = 317
   end
 end

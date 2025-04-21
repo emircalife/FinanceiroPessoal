@@ -1,8 +1,8 @@
 object DM: TDM
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 289
-  Width = 405
+  Height = 291
+  Width = 639
   object Conn: TFDConnection
     Params.Strings = (
       'Database=FinanceiroDB'
@@ -116,7 +116,11 @@ object DM: TDM
       '       cd.DESCRICAO as categoriaDespesa,'
       '       ld.IDUSUARIO,'
       '       ld.DATAPAGAMENTO,'
-      '       ld.OBSERVACOES'
+      '       ld.OBSERVACOES,'
+      '       ld.DESPESAFIXA,'
+      '       ld.nParc,'
+      '       ld.totParc,'
+      '       ld.arquivoAnexo'
       'FROM lancamentosdespesa ld'
       'INNER JOIN CATEGORIASDESPESA cd ON ld.idcategoria = cd.id'
       'ORDER BY ld.DATAVENCIMENTO ')
@@ -201,6 +205,27 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'OBSERVACOES'
       Origin = 'observacoes'
+      Size = 255
+    end
+    object qryDespesasDESPESAFIXA: TShortintField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESPESAFIXA'
+      Origin = 'despesaFixa'
+    end
+    object qryDespesasnParc: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'nParc'
+      Origin = 'nParc'
+    end
+    object qryDespesastotParc: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'totParc'
+      Origin = 'totParc'
+    end
+    object qryDespesasarquivoAnexo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'arquivoAnexo'
+      Origin = 'arquivoAnexo'
       Size = 255
     end
   end
@@ -401,5 +426,21 @@ object DM: TDM
     VendorLib = 'D:\Projetos\Delphi\FinanceiroPessoal\Win32\Debug\LIBMYSQL.DLL'
     Left = 272
     Top = 16
+  end
+  object qryExportDespesasExcel: TFDQuery
+    Connection = Conn
+    SQL.Strings = (
+      
+        'SELECT DESCRICAO, DATAVENCIMENTO, VALORAPAGAR, VALORPAGO, DATAPA' +
+        'GAMENTO, '
+      
+        '       OBSERVACOES, DAY(DATAVENCIMENTO) DIA, MONTH(DATAVENCIMENT' +
+        'O) MES, '
+      '       YEAR(DATAVENCIMENTO) ANO, DESPESAFIXA, nParc, totParc'
+      'FROM `financeirodb`.`lancamentosdespesa`'
+      'WHERE YEAR(DATAVENCIMENTO)=2025'
+      'ORDER BY DESCRICAO, MES, ANO;')
+    Left = 432
+    Top = 128
   end
 end

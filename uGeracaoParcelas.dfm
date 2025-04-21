@@ -4,8 +4,8 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Gera'#231#227'o de Parcelas'
-  ClientHeight = 549
-  ClientWidth = 917
+  ClientHeight = 628
+  ClientWidth = 1036
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
   Position = poMainFormCenter
   OnCreate = FormCreate
   DesignSize = (
-    917
-    549)
+    1036
+    628)
   TextHeight = 15
   object lblVencimento: TLabel
     Left = 20
@@ -55,22 +55,30 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
     Caption = 'Qtde de Parcelas'
   end
   object lblTipoParcelamento: TLabel
-    Left = 616
+    Left = 735
     Top = 434
     Width = 116
     Height = 15
     Caption = 'Tipo de Parcelamento'
   end
+  object lblObservacoesDespesas: TLabel
+    Left = 20
+    Top = 465
+    Width = 67
+    Height = 15
+    Anchors = [akLeft, akBottom]
+    Caption = 'Observa'#231#245'es'
+  end
   object grdParcelasDespesas: TDBGrid
     Left = 1
     Top = 8
-    Width = 908
-    Height = 349
+    Width = 1027
+    Height = 346
     TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = dsParcelasDespesas
     ReadOnly = True
-    TabOrder = 0
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12
@@ -89,28 +97,44 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
         Expanded = False
         FieldName = 'descricao'
         Title.Caption = 'Despesa'
-        Width = 344
+        Width = 335
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'categoriaDespesa'
         Title.Caption = 'Categoria'
-        Width = 322
+        Width = 294
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nParc'
+        Title.Caption = 'N'#186' Parcela'
+        Width = 71
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'totParc'
+        Title.Alignment = taCenter
+        Title.Caption = 'Total Parcelas'
+        Width = 89
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'valorAPagar'
+        Title.Alignment = taCenter
         Title.Caption = 'R$ a Pagar'
-        Width = 80
+        Width = 89
         Visible = True
       end>
   end
   object pnlBotoes: TPanel
     Left = 1
-    Top = 470
-    Width = 908
+    Top = 549
+    Width = 1027
     Height = 78
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 8
@@ -163,7 +187,7 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
     end
     object btnSair: TBitBtn
       AlignWithMargins = True
-      Left = 804
+      Left = 923
       Top = 4
       Width = 100
       Height = 70
@@ -171,7 +195,6 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
       Caption = 'Sai&r'
       TabOrder = 4
       OnClick = btnSairClick
-      ExplicitLeft = 784
     end
     object btnExcluirParcela: TBitBtn
       AlignWithMargins = True
@@ -225,7 +248,7 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
     TabOrder = 3
   end
   object cboTipoParcelamento: TComboBox
-    Left = 748
+    Left = 885
     Top = 431
     Width = 143
     Height = 23
@@ -238,20 +261,10 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
       'Mensal'
       'Semanal')
   end
-  object edtDTVencimento: TMaskEdit
-    Left = 111
-    Top = 375
-    Width = 98
-    Height = 23
-    EditMask = '!99/99/0000;1;_'
-    MaxLength = 10
-    TabOrder = 1
-    Text = '  /  /    '
-  end
   object rgFormaParcelas: TRadioGroup
     Left = 616
     Top = 360
-    Width = 293
+    Width = 412
     Height = 65
     Caption = '   Forma de parcela   '
     Columns = 2
@@ -261,6 +274,32 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
       'Valor Total das Parcelas')
     TabOrder = 6
     OnClick = rgFormaParcelasClick
+  end
+  object memObservacoes: TMemo
+    Left = 111
+    Top = 462
+    Width = 917
+    Height = 75
+    MaxLength = 255
+    TabOrder = 9
+  end
+  object chkDespesaFixa: TCheckBox
+    Left = 434
+    Top = 436
+    Width = 97
+    Height = 17
+    Caption = 'Despesa Fixa'
+    TabOrder = 10
+  end
+  object edtDTVencimento: TMaskEdit
+    Left = 111
+    Top = 375
+    Width = 98
+    Height = 23
+    EditMask = '!99/99/0000;1;_'
+    MaxLength = 10
+    TabOrder = 0
+    Text = '  /  /    '
   end
   object dsParcelasDespesas: TDataSource
     DataSet = cdsDespesas
@@ -316,6 +355,19 @@ object frmGeracaoParcelas: TfrmGeracaoParcelas
     object cdsDespesasvalorAPagar: TFloatField
       FieldName = 'valorAPagar'
       DisplayFormat = '#,##0.00'
+    end
+    object cdsDespesasobservacoes: TStringField
+      FieldName = 'observacoes'
+      Size = 255
+    end
+    object cdsDespesasdespesaFixa: TBooleanField
+      FieldName = 'despesaFixa'
+    end
+    object cdsDespesasnParc: TIntegerField
+      FieldName = 'nParc'
+    end
+    object cdsDespesastotParc: TIntegerField
+      FieldName = 'totParc'
     end
   end
 end
