@@ -14,7 +14,8 @@ uses
   uFuncoes in 'uFuncoes.pas',
   uUsuarios in 'uUsuarios.pas' {frmUsuarios},
   uImprDespesas in 'uImprDespesas.pas' {frmImprDespesas},
-  uRelDespesas in 'uRelDespesas.pas' {frmRelDespesas};
+  uRelDespesas in 'uRelDespesas.pas' {frmRelDespesas},
+  uExpoPlanExelAnual in 'uExpoPlanExelAnual.pas' {frmExpoPlanExelAnual};
 
 {$R *.res}
 var
@@ -25,8 +26,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmImprDespesas, frmImprDespesas);
-  Application.CreateForm(TfrmRelDespesas, frmRelDespesas);
   if FrmLogin.ShowModal = mrOk then //Caso o retorno da tela seja Ok
   begin
     nIdUsuario   := frmLogin.nIdUsuario;
