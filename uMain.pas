@@ -119,6 +119,8 @@ type
     btnArquivoAnexo: TBitBtn;
     odArquivoAnexo: TOpenDialog;
     btnAbirArquivo: TBitBtn;
+    N2: TMenuItem;
+    ListadeDesejos1: TMenuItem;
     procedure Despesas1Click(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure Receitas1Click(Sender: TObject);
@@ -155,6 +157,7 @@ type
     procedure ParaExcellPlanilhadoAno1Click(Sender: TObject);
     procedure btnArquivoAnexoClick(Sender: TObject);
     procedure btnAbirArquivoClick(Sender: TObject);
+    procedure ListadeDesejos1Click(Sender: TObject);
   private
     { Private declarations }
     cMesAtual, cAnoAtual, cMesAnoAtual : String;
@@ -181,7 +184,7 @@ implementation
 {$R *.dfm}
 
 uses uCategoriasDespesa, uDM, uCategoriasReceita, uGeracaoParcelas, uCalendario,
-  uFuncoes, uLogin, uUsuarios, uImprDespesas, uExpoPlanExelAnual;
+  uFuncoes, uLogin, uUsuarios, uImprDespesas, uExpoPlanExelAnual, uListaDesejos;
 
 procedure TfrmMain.btnAbirArquivoClick(Sender: TObject);
 var
@@ -601,6 +604,16 @@ begin
         'Total de Receitas Selecionadas', MB_OK + MB_ICONINFORMATION);
   end;
 
+end;
+
+procedure TfrmMain.ListadeDesejos1Click(Sender: TObject);
+begin
+  frmListaDesejos := TfrmListaDesejos.Create(self);
+  frmListaDesejos.nIdUsuario   := nIdUsuario;
+  frmListaDesejos.cNomeUsuario := cNomeUsuario;
+
+  frmListaDesejos.ShowModal;
+  freeAndNil(frmListaDesejos);
 end;
 
 procedure TfrmMain.ParaExcellPlanilhadoAno1Click(Sender: TObject);

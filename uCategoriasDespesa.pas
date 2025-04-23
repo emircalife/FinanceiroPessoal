@@ -10,7 +10,7 @@ uses
 type
   TfrmCategoriasDespesa = class(TForm)
     grdCategoriasDespesa: TDBGrid;
-    dsCategoriasDespesa: TDataSource;
+    dsCategoriaDespesa: TDataSource;
     lblCategoriaDespesa: TLabel;
     pnlBotoes: TPanel;
     btnNovo: TBitBtn;

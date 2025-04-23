@@ -71,3 +71,17 @@ CREATE TABLE `lancamentosreceita` (
   CONSTRAINT `FKLancamentosReceita_Categorias` FOREIGN KEY (`idCategoria`) REFERENCES `categoriasreceita` (`id`),
   CONSTRAINT `FKLancamentosReceita_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
 );
+
+CREATE TABLE `desejoscompra` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricaoDesejo` varchar(255) NOT NULL,
+  `linkSite` varchar(255) NOT NULL,
+  `valorBem` decimal(15,2) NOT NULL,
+  `dataCadastro` date NOT NULL,
+  `dataCompra` date DEFAULT NULL,
+  `idUsuario` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_desejosCompra_usuarios_idx` (`idUsuario`),
+  CONSTRAINT `FK_desejosCompra_usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
+);
+

@@ -5,7 +5,7 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
   BorderStyle = bsDialog
   Caption = 'Categorias de Despesa'
   ClientHeight = 518
-  ClientWidth = 929
+  ClientWidth = 911
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
-    929
+    911
     518)
   TextHeight = 15
   object lblCategoriaDespesa: TLabel
@@ -35,11 +35,11 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
   end
   object grdCategoriasDespesa: TDBGrid
     Left = 0
-    Top = 40
-    Width = 909
+    Top = 37
+    Width = 903
     Height = 345
     Anchors = [akLeft, akTop, akRight]
-    DataSource = dsCategoriasDespesa
+    DataSource = dsCategoriaDespesa
     ReadOnly = True
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -58,20 +58,19 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
       item
         Expanded = False
         FieldName = 'descricao'
-        Title.Caption = 'Categoria de Despesa'
-        Width = 908
+        Title.Caption = 'Despesa'
+        Width = 821
         Visible = True
       end>
   end
   object pnlBotoes: TPanel
     Left = 0
     Top = 456
-    Width = 929
+    Width = 911
     Height = 62
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 455
-    ExplicitWidth = 925
+    ExplicitWidth = 929
     object btnNovo: TBitBtn
       AlignWithMargins = True
       Left = 4
@@ -131,7 +130,7 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
     end
     object btnFechar: TBitBtn
       AlignWithMargins = True
-      Left = 825
+      Left = 807
       Top = 4
       Width = 100
       Height = 54
@@ -139,7 +138,7 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
       Caption = 'Fecha&r'
       TabOrder = 5
       OnClick = btnFecharClick
-      ExplicitLeft = 821
+      ExplicitLeft = 825
     end
   end
   object edtPesquisa: TEdit
@@ -156,10 +155,10 @@ object frmCategoriasDespesa: TfrmCategoriasDespesa
     Width = 762
     Height = 23
     DataField = 'DESCRICAO'
-    DataSource = dsCategoriasDespesa
+    DataSource = dsCategoriaDespesa
     TabOrder = 3
   end
-  object dsCategoriasDespesa: TDataSource
+  object dsCategoriaDespesa: TDataSource
     DataSet = DM.qryCategoriasDespesa
     Left = 704
     Top = 136

@@ -443,4 +443,72 @@ object DM: TDM
     Left = 432
     Top = 128
   end
+  object qryListaDesejos: TFDQuery
+    Connection = Conn
+    SQL.Strings = (
+      
+        'SELECT ROW_NUMBER() OVER(ORDER BY dc.descricaoDesejo, dc.dataCad' +
+        'astro DESC) AS SEQUENCIA, '
+      '       dc.id,'
+      '       dc.descricaoDesejo,'
+      '       dc.linkSite,'
+      '       dc.valorBem,'
+      '       dc.dataCadastro,'
+      '       dc.dataCompra,'
+      '       dc.idUsuario'
+      'FROM desejoscompra dc'
+      'order by dc.descricaoDesejo, dc.dataCadastro desc')
+    Left = 552
+    Top = 128
+    object qryListaDesejosSEQUENCIA: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'SEQUENCIA'
+      Origin = 'SEQUENCIA'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryListaDesejosid: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qryListaDesejosdescricaoDesejo: TStringField
+      FieldName = 'descricaoDesejo'
+      Origin = 'descricaoDesejo'
+      Required = True
+      Size = 255
+    end
+    object qryListaDesejoslinkSite: TStringField
+      FieldName = 'linkSite'
+      Origin = 'linkSite'
+      Required = True
+      Size = 255
+    end
+    object qryListaDesejosvalorBem: TBCDField
+      FieldName = 'valorBem'
+      Origin = 'valorBem'
+      Required = True
+      DisplayFormat = '#,##0.00'
+      Precision = 15
+      Size = 2
+    end
+    object qryListaDesejosdataCadastro: TDateField
+      FieldName = 'dataCadastro'
+      Origin = 'dataCadastro'
+      Required = True
+      EditMask = '99/99/9999'
+    end
+    object qryListaDesejosdataCompra: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'dataCompra'
+      Origin = 'dataCompra'
+      EditMask = '99/99/9999'
+    end
+    object qryListaDesejosidUsuario: TIntegerField
+      FieldName = 'idUsuario'
+      Origin = 'idUsuario'
+      Required = True
+    end
+  end
 end

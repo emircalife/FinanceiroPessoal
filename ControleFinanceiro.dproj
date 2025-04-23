@@ -147,6 +147,10 @@
             <Form>frmExpoPlanExelAnual</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="uListaDesejos.pas">
+            <Form>frmListaDesejos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -74,6 +74,15 @@ type
     qryDespesasnParc: TIntegerField;
     qryDespesastotParc: TIntegerField;
     qryDespesasarquivoAnexo: TStringField;
+    qryListaDesejos: TFDQuery;
+    qryListaDesejosSEQUENCIA: TLargeintField;
+    qryListaDesejosid: TIntegerField;
+    qryListaDesejosdescricaoDesejo: TStringField;
+    qryListaDesejoslinkSite: TStringField;
+    qryListaDesejosvalorBem: TBCDField;
+    qryListaDesejosdataCadastro: TDateField;
+    qryListaDesejosdataCompra: TDateField;
+    qryListaDesejosidUsuario: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
