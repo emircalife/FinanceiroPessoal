@@ -2095,6 +2095,13 @@ object frmMain: TfrmMain
         Caption = '&Usu'#225'rios'
         OnClick = Usurios1Click
       end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object ListadeDesejos1: TMenuItem
+        Caption = 'Lista de Desejos'
+        OnClick = ListadeDesejos1Click
+      end
     end
     object gerarParcelas1: TMenuItem
       Caption = 'Gerar Parcelas'
