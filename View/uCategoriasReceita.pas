@@ -72,15 +72,37 @@ begin
 end;
 
 procedure TfrmCategoriasReceita.btnAlterarClick(Sender: TObject);
+var
+  clsCategoriasReceitaMan        : TCategoriasReceita;
+  clsCategoriasReceitaController : TCategoriasReceitaController;
 begin
-  Operacao := tpAlterar;
+  SetOperacao(tpAlterar);
 
-  edtCategoriaReceita.Text := clsCategoriasReceita.descricao;
+
+  try
+    clsCategoriasReceitaMan         := TCategoriasReceita.Create;
+    clsCategoriasReceitaController  := TCategoriasReceitaController.Create;
+
+    clsCategoriasReceitaMan.id  := DM.qryCategoriasReceita.FieldByName('id').AsInteger;
+
+    clsCategoriasReceitaMan     := clsCategoriasReceitaController.findById(clsCategoriasReceitaMan);
+
+    if clsCategoriasReceitaMan <> nil then
+    begin
+        edtCategoriaReceita.Text := clsCategoriasReceitaMan.descricao;
+    end;
+  except
+    On E: Exception do
+      ShowMessage(e.Message);
+  end;
+
+  FreeAndNil(clsCategoriasReceitaMan);
+  FreeAndNil(clsCategoriasReceitaController);
 end;
 
 procedure TfrmCategoriasReceita.btnDesfazerClick(Sender: TObject);
 begin
-  Operacao := tpNone;
+  SetOperacao(tpNone);
 
   edtCategoriaReceita.Text := EmptyStr;
 end;
@@ -91,7 +113,7 @@ var
   clsCategoriasReceitaController : TCategoriasReceitaController;
 
 begin
-  Operacao := tpNone;
+  SetOperacao(tpNone);
 
   try
     clsCategoriasReceita           := TCategoriasReceita.Create;
@@ -118,7 +140,7 @@ end;
 
 procedure TfrmCategoriasReceita.btnNovoClick(Sender: TObject);
 begin
-  Operacao := tpIncluir;
+  SetOperacao(tpIncluir);
 
   edtCategoriaReceita.Text := EmptyStr;
   edtCategoriaReceita.SetFocus;
@@ -160,6 +182,10 @@ begin
 
   FreeAndNil(clsCategoriasReceita);
   FreeAndNil(clsCategoriasReceitaController);
+
+  edtCategoriaReceita.Text := '';
+
+  SetOperacao(tpNone);
 end;
 
 procedure TfrmCategoriasReceita.dsCategoriasReceitaDataChange(Sender: TObject;

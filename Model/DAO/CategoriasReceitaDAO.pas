@@ -78,15 +78,15 @@ const
                   'WHERE id=:Pid                   ';
 begin
   try
-    DM.qryCategoriasReceita.Close;
-    DM.qryCategoriasReceita.SQL.Clear;
-    DM.qryCategoriasReceita.SQL.Add(cSQL);
-    DM.qryCategoriasReceita.ParamByName('Pid').AsInteger := clsCategoriasReceita.id;
-    DM.qryCategoriasReceita.Open;
+    DM.qryManutCategoriasReceita.Close;
+    DM.qryManutCategoriasReceita.SQL.Clear;
+    DM.qryManutCategoriasReceita.SQL.Add(cSQL);
+    DM.qryManutCategoriasReceita.ParamByName('Pid').AsInteger := clsCategoriasReceita.id;
+    DM.qryManutCategoriasReceita.Open;
 
-    clsCategoriasReceita.id        := DM.qryCategoriasReceita.FieldByName('id').AsInteger;
-    clsCategoriasReceita.descricao := DM.qryCategoriasReceita.FieldByName('descricao').AsString;
-    clsCategoriasReceita.idUsuario := DM.qryCategoriasReceita.FieldByName('idUsuario').AsInteger;
+    clsCategoriasReceita.id        := DM.qryManutCategoriasReceita.FieldByName('id').AsInteger;
+    clsCategoriasReceita.descricao := DM.qryManutCategoriasReceita.FieldByName('descricao').AsString;
+    clsCategoriasReceita.idUsuario := DM.qryManutCategoriasReceita.FieldByName('idUsuario').AsInteger;
   except
     Raise Exception.Create('Houve erro na listagem da Categoria de Receita, favor tente novamente!');
   end;

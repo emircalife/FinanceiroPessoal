@@ -79,15 +79,15 @@ const
                   'ORDER BY descricao              ';
 begin
   try
-    DM.qryCategoriasDespesa.Close;
-    DM.qryCategoriasDespesa.SQL.Clear;
-    DM.qryCategoriasDespesa.SQL.Add(cSQL);
-    DM.qryCategoriasDespesa.ParamByName('Pid').AsInteger := clsCategoriasDespesa.id;
-    DM.qryCategoriasDespesa.Open;
+    DM.qryManutCategoriasDespesa.Close;
+    DM.qryManutCategoriasDespesa.SQL.Clear;
+    DM.qryManutCategoriasDespesa.SQL.Add(cSQL);
+    DM.qryManutCategoriasDespesa.ParamByName('Pid').AsInteger := clsCategoriasDespesa.id;
+    DM.qryManutCategoriasDespesa.Open;
 
-    clsCategoriasDespesa.id        := DM.qryCategoriasDespesa.FieldByName('id').AsInteger;
-    clsCategoriasDespesa.descricao := DM.qryCategoriasDespesa.FieldByName('descricao').AsString;
-    clsCategoriasDespesa.idUsuario := DM.qryCategoriasDespesa.FieldByName('idUsuario').AsInteger;
+    clsCategoriasDespesa.id        := DM.qryManutCategoriasDespesa.FieldByName('id').AsInteger;
+    clsCategoriasDespesa.descricao := DM.qryManutCategoriasDespesa.FieldByName('descricao').AsString;
+    clsCategoriasDespesa.idUsuario := DM.qryManutCategoriasDespesa.FieldByName('idUsuario').AsInteger;
   except
     Raise Exception.Create('Houve erro na listagem da Categoria de Despesa, favor tente novamente!');
   end;

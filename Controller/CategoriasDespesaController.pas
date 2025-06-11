@@ -10,7 +10,7 @@ type
     procedure incluir(clsCategoriasDespesa : TCategoriasDespesa);
     procedure alterar(clsCategoriasDespesa : TCategoriasDespesa);
     procedure excluir(clsCategoriasDespesa : TCategoriasDespesa);
-    procedure findById(clsCategoriasDespesa : TCategoriasDespesa);
+    function findById(clsCategoriasDespesa : TCategoriasDespesa) : TCategoriasDespesa;
     procedure findAll();
   end;
 
@@ -36,9 +36,9 @@ begin
   CategoriasDespesaDAO.excluir(clsCategoriasDespesa);
 end;
 
-procedure TCategoriasDespesaController.findById(clsCategoriasDespesa : TCategoriasDespesa);
+function TCategoriasDespesaController.findById(clsCategoriasDespesa : TCategoriasDespesa) : TCategoriasDespesa;
 begin
-  CategoriasDespesaDAO.findById(clsCategoriasDespesa);
+  Result := CategoriasDespesaDAO.findById(clsCategoriasDespesa);
 end;
 
 procedure TCategoriasDespesaController.findAll();

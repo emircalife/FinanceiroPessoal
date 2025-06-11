@@ -70,15 +70,37 @@ begin
 end;
 
 procedure TfrmCategoriasDespesa.btnAlterarClick(Sender: TObject);
+var
+  clsCategoriasDespesaMan        : TCategoriasDespesa;
+  clsCategoriasDespesaController : TCategoriasDespesaController;
 begin
-  Operacao := tpAlterar;
+  SetOperacao(tpAlterar);
 
-  edtCategoriaDespesa.Text := clsCategoriasDespesa.descricao;
+
+  try
+    clsCategoriasDespesaMan         := TCategoriasDespesa.Create;
+    clsCategoriasDespesaController  := TCategoriasDespesaController.Create;
+
+    clsCategoriasDespesaMan.id  := DM.qryCategoriasDespesa.FieldByName('id').AsInteger;
+
+    clsCategoriasDespesaMan     := clsCategoriasDespesaController.findById(clsCategoriasDespesaMan);
+
+    if clsCategoriasDespesaMan <> nil then
+    begin
+      edtCategoriaDespesa.Text :=  clsCategoriasDespesaMan.descricao;
+    end;
+  except
+    On E: Exception do
+      ShowMessage(e.Message);
+  end;
+
+  FreeAndNil(clsCategoriasDespesaMan);
+  FreeAndNil(clsCategoriasDespesaController);
 end;
 
 procedure TfrmCategoriasDespesa.btnDesfazerClick(Sender: TObject);
 begin
-  Operacao := tpNone;
+  SetOperacao(tpNone);
 
   edtCategoriaDespesa.Text := EmptyStr;
 end;
@@ -89,7 +111,7 @@ var
   clsCategoriasDespesaController : TCategoriasDespesaController;
 
 begin
-  Operacao := tpNone;
+  SetOperacao(tpNone);
 
   try
     clsCategoriasDespesa           :=  TCategoriasDespesa.Create;
@@ -116,7 +138,7 @@ end;
 
 procedure TfrmCategoriasDespesa.btnNovoClick(Sender: TObject);
 begin
-  Operacao := tpIncluir;
+  SetOperacao(tpIncluir);
 
   edtCategoriaDespesa.Text := EmptyStr;
   edtCategoriaDespesa.SetFocus;
@@ -158,6 +180,10 @@ begin
 
   FreeAndNil(clsCategoriasDespesa);
   FreeAndNil(clsCategoriasDespesaController);
+
+  edtCategoriaDespesa.Text := '';
+
+  SetOperacao(tpNone);
 end;
 
 procedure TfrmCategoriasDespesa.dsCategoriaDespesaDataChange(Sender: TObject;
