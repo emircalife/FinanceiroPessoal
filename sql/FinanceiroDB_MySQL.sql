@@ -1,12 +1,12 @@
 CREATE DATABASE `financeirodb`;
 
-CREATE TABLE `niveisacesso` (
+CREATE TABLE IF NOT EXISTS `niveisacesso` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `usuarios` (
+CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
   `login` varchar(35) NOT NULL,
   `senha` varchar(150) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `usuarios` (
   CONSTRAINT `FKUsuarios_NiveisAcesso` FOREIGN KEY (`idNivel`) REFERENCES `niveisacesso` (`id`)
 );
 
-CREATE TABLE `categoriasdespesa` (
+CREATE TABLE IF NOT EXISTS `categoriasdespesa` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
   `idUsuario` int NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE `categoriasdespesa` (
   CONSTRAINT `FKCategoriasDespesa_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
 );
 
-CREATE TABLE `lancamentosdespesa` (
+CREATE TABLE IF NOT EXISTS `lancamentosdespesa` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
   `datavencimento` date NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `lancamentosdespesa` (
   CONSTRAINT `FKLancamentosDespesa_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
 );
 
-CREATE TABLE `categoriasreceita` (
+CREATE TABLE IF NOT EXISTS `categoriasreceita` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
   `idUsuario` int NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE `categoriasreceita` (
   CONSTRAINT `FKCategoriasReceita_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
 );
 
-CREATE TABLE `lancamentosreceita` (
+CREATE TABLE IF NOT EXISTS `lancamentosreceita` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL,
   `dataareceber` date NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE `lancamentosreceita` (
   CONSTRAINT `FKLancamentosReceita_Usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
 );
 
-CREATE TABLE `desejoscompra` (
+CREATE TABLE IF NOT EXISTS `desejoscompra` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricaoDesejo` varchar(255) NOT NULL,
   `linkSite` varchar(255) NOT NULL,
