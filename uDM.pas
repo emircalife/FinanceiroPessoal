@@ -9,7 +9,8 @@ uses
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Phys.IBBase, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.MySQL,
-  FireDAC.Phys.MySQLDef, INIFiles, Vcl.Dialogs;
+  FireDAC.Phys.MySQLDef, INIFiles, Vcl.Dialogs, REST.Types,
+  Data.Bind.Components, Data.Bind.ObjectScope, REST.Client;
 
 type
   TDM = class(TDataModule)
@@ -26,63 +27,62 @@ type
     qryLogin: TFDQuery;
 
     qryUsuarios: TFDQuery;
-    qryDespesasSEQUENCIA: TLargeintField;
-    qryReceitasSEQUENCIA: TLargeintField;
-    qryCategoriasDespesaSEQUENCIA: TLargeintField;
-    qryCategoriasReceitaSEQUENCIA: TLargeintField;
-    qryUsuariosSEQUENCIA: TLargeintField;
     FDMySQLLink: TFDPhysMySQLDriverLink;
-    qryCategoriasDespesaid: TIntegerField;
-    qryCategoriasDespesadescricao: TStringField;
-    qryCategoriasDespesaidusuario: TIntegerField;
     qryCategoriasReceitaid: TIntegerField;
     qryCategoriasReceitadescricao: TStringField;
     qryCategoriasReceitaidusuario: TIntegerField;
-    qryDespesasID: TIntegerField;
-    qryDespesasDESCRICAO: TStringField;
-    qryDespesasDATAVENCIMENTO: TDateField;
-    qryDespesasVALORAPAGAR: TBCDField;
-    qryDespesasVALORPAGO: TBCDField;
-    qryDespesasIDCATEGORIA: TIntegerField;
-    qryDespesascategoriaDespesa: TStringField;
-    qryDespesasIDUSUARIO: TIntegerField;
-    qryDespesasDATAPAGAMENTO: TDateField;
-    qryReceitasID: TIntegerField;
-    qryReceitasDESCRICAO: TStringField;
-    qryReceitasDATARECEBIMENTO: TDateField;
-    qryReceitasVALORARECEBER: TBCDField;
-    qryReceitasVALORRECEBIDO: TBCDField;
-    qryReceitasIDCATEGORIA: TIntegerField;
-    qryReceitascategoriaReceita: TStringField;
-    qryReceitasIDUSUARIO: TIntegerField;
-    qryReceitasDATAARECEBER: TDateField;
-    qryLoginID: TFDAutoIncField;
-    qryLoginLOGIN: TStringField;
-    qryLoginSENHA: TStringField;
-    qryLoginIDNIVEL: TIntegerField;
-    qryLoginNIVELDEACESSO: TStringField;
-    qryUsuariosID: TIntegerField;
-    qryUsuariosLOGIN: TStringField;
-    qryUsuariosSENHA: TStringField;
-    qryUsuariosIDNIVEL: TIntegerField;
-    qryUsuariosNIVELDEACESSO: TStringField;
-    qryDespesasOBSERVACOES: TStringField;
-    qryReceitasOBSERVACOES: TStringField;
-    qryDespesasVALORDIFERENCA: TBCDField;
     qryExportDespesasExcel: TFDQuery;
-    qryDespesasDESPESAFIXA: TShortintField;
+    qryListaDesejos: TFDQuery;
+    qryManutCategoriasDespesa: TFDQuery;
+    qryCategoriasDespesaid: TFDAutoIncField;
+    qryCategoriasDespesadescricao: TStringField;
+    qryCategoriasDespesaidusuario: TIntegerField;
+    qryManutCategoriasReceita: TFDQuery;
+    qryManutUsuarios: TFDQuery;
+    qryNivelAcesso: TFDQuery;
+    qryUsuariosID: TFDAutoIncField;
+    qryUsuariosemail: TStringField;
+    qryUsuariosnome: TStringField;
+    qryUsuariossenha: TStringField;
+    qryUsuariosnivel: TStringField;
+    qryManutListaDesejos: TFDQuery;
+    qryManutDespesas: TFDQuery;
+    qryManutReceitas: TFDQuery;
+    qryManutReceitasid: TFDAutoIncField;
+    qryManutReceitasdescricao: TStringField;
+    qryManutReceitasdatarecebimento: TDateField;
+    qryManutReceitasvalorareceber: TBCDField;
+    qryManutReceitasvalorrecebido: TBCDField;
+    qryManutReceitasidcategoria: TIntegerField;
+    qryManutReceitascategoriareceita: TStringField;
+    qryManutReceitasidusuario: TIntegerField;
+    qryManutReceitasdataareceber: TDateField;
+    qryManutReceitasobservacoes: TStringField;
+    qryDespesasid: TIntegerField;
+    qryDespesasdescricao: TStringField;
+    qryDespesasdataVencimento: TDateField;
+    qryDespesasvalorAPagar: TBCDField;
+    qryDespesasvalorPago: TBCDField;
+    qryDespesasvalorDiferenca: TBCDField;
+    qryDespesasidCategoria: TIntegerField;
+    qryDespesascategoriaDespesa: TStringField;
+    qryDespesasidUsuario: TIntegerField;
+    qryDespesasdataPagamento: TDateField;
+    qryDespesasobservacoes: TStringField;
+    qryDespesasdespesaFixa: TShortintField;
     qryDespesasnParc: TIntegerField;
     qryDespesastotParc: TIntegerField;
     qryDespesasarquivoAnexo: TStringField;
-    qryListaDesejos: TFDQuery;
-    qryListaDesejosSEQUENCIA: TLargeintField;
-    qryListaDesejosid: TIntegerField;
-    qryListaDesejosdescricaoDesejo: TStringField;
-    qryListaDesejoslinkSite: TStringField;
-    qryListaDesejosvalorBem: TBCDField;
-    qryListaDesejosdataCadastro: TDateField;
-    qryListaDesejosdataCompra: TDateField;
-    qryListaDesejosidUsuario: TIntegerField;
+    qryReceitasid: TFDAutoIncField;
+    qryReceitasdescricao: TStringField;
+    qryReceitasdatarecebimento: TDateField;
+    qryReceitasvalorareceber: TBCDField;
+    qryReceitasvalorrecebido: TBCDField;
+    qryReceitasidcategoria: TIntegerField;
+    qryReceitascategoriareceita: TStringField;
+    qryReceitasidusuario: TIntegerField;
+    qryReceitasdataareceber: TDateField;
+    qryReceitasobservacoes: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -90,7 +90,6 @@ type
     iIniFile : TIniFile;
   public
     { Public declarations }
-    function getNextId(vGen: String): integer;
     function LerIni(Chave1, Chave2: String; ValorPadrao: String = ''): String;
   end;
 
@@ -127,7 +126,6 @@ var
 begin
   cBD       := LerIni('Config', 'BD');
 
-
   if cBD = 'MySQL' then
   begin
     cDriverID := 'MySQL';
@@ -144,7 +142,7 @@ begin
         Params.Values['Server']     := cServer;
         Params.Values['Database']   := cDatabase;
         Params.Values['User_name']  := cUser;
-        Params.Values['Password']   := cPassword;
+        //Params.Values['Password']   := cPassword;
         Connected := True;
       end;
     except
@@ -156,25 +154,6 @@ end;
 procedure TDM.DataModuleDestroy(Sender: TObject);
 begin
   Conn.Connected := false;
-end;
-
-function TDM.getNextId(vGen: String): integer;
-var
-  TMPsql: TFDQuery;
-begin
-  Result := -1;
-
-  {
-  try
-    TMPsql := TFDQuery.Create(nil);
-    TMPsql.Connection := Conn;
-    TMPsql.SQL.Text := 'SELECT GEN_ID(GEN_' + trim(vGen) + '_ID' + ', 1) AS VLR FROM RDB$DATABASE';
-    TMPsql.Active := True;
-    Result := TMPsql.FieldByName('VLR').AsInteger;
-  finally
-    TMPsql.Free;
-  end;
-  }
 end;
 
 end.

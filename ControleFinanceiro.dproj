@@ -101,56 +101,86 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uMain.pas">
-            <Form>frmMain</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="uDM.pas">
             <Form>DM</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="uCategoriasDespesa.pas">
-            <Form>frmCategoriasDespesa</Form>
+        <DCCReference Include="uDMRest.pas">
+            <Form>DMRest</Form>
             <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="uCategoriasReceita.pas">
-            <Form>frmCategoriasReceita</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uGeracaoParcelas.pas">
-            <Form>frmGeracaoParcelas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uCalendario.pas">
+        <DCCReference Include="Model\CategoriasReceita.pas"/>
+        <DCCReference Include="Model\Despesa.pas"/>
+        <DCCReference Include="Model\ListaDesejos.pas"/>
+        <DCCReference Include="Model\Receita.pas"/>
+        <DCCReference Include="Model\Usuario.pas"/>
+        <DCCReference Include="Model\CategoriasDespesa.pas"/>
+        <DCCReference Include="Controller\Utils\Bcrypt.pas"/>
+        <DCCReference Include="Controller\Utils\Funcoes.pas"/>
+        <DCCReference Include="Model\ListaCategoriasDespesa.pas"/>
+        <DCCReference Include="View\uCalendario.pas">
             <Form>frmCalendario</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uLogin.pas">
-            <Form>frmLogin</Form>
+        <DCCReference Include="View\uCategoriasDespesa.pas">
+            <Form>frmCategoriasDespesa</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uFuncoes.pas"/>
-        <DCCReference Include="uUsuarios.pas">
-            <Form>frmUsuarios</Form>
+        <DCCReference Include="View\uCategoriasReceita.pas">
+            <Form>frmCategoriasReceita</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uImprDespesas.pas">
-            <Form>frmImprDespesas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uRelDespesas.pas">
-            <Form>frmRelDespesas</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="uExpoPlanExelAnual.pas">
+        <DCCReference Include="View\uExpoPlanExelAnual.pas">
             <Form>frmExpoPlanExelAnual</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uListaDesejos.pas">
+        <DCCReference Include="View\uGeracaoParcelas.pas">
+            <Form>frmGeracaoParcelas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\uImprDespesas.pas">
+            <Form>frmImprDespesas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\uListaDesejos.pas">
             <Form>frmListaDesejos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="View\uLogin.pas">
+            <Form>frmLogin</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\uMain.pas">
+            <Form>frmMain</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\uRelDespesas.pas">
+            <Form>frmRelDespesas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\uUsuarios.pas">
+            <Form>frmUsuarios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Controller\LoginController.pas"/>
+        <DCCReference Include="Model\DAO\LoginDAO.pas"/>
+        <DCCReference Include="Model\DAO\UsuarioDAO.pas"/>
+        <DCCReference Include="Controller\UsuarioController.pas"/>
+        <DCCReference Include="Model\Nivel.pas"/>
+        <DCCReference Include="Model\DAO\NivelDAO.pas"/>
+        <DCCReference Include="Model\DAO\CategoriasDespesaDAO.pas"/>
+        <DCCReference Include="Model\DAO\CategoriasReceitaDAO.pas"/>
+        <DCCReference Include="Controller\CategoriasDespesaController.pas"/>
+        <DCCReference Include="Controller\CategoriasReceitaController.pas"/>
+        <DCCReference Include="Controller\DespesaController.pas"/>
+        <DCCReference Include="Model\DAO\DespesaDAO.pas"/>
+        <DCCReference Include="Model\DAO\ReceitaDAO.pas"/>
+        <DCCReference Include="Controller\ReceitaController.pas"/>
+        <DCCReference Include="Controller\NivelController.pas"/>
+        <DCCReference Include="Model\DAO\MainDAO.pas"/>
+        <DCCReference Include="Controller\MainController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

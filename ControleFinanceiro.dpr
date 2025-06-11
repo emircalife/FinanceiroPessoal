@@ -4,45 +4,63 @@ uses
   Vcl.Forms,
   Controls,
   SysUtils,
-  uMain in 'uMain.pas' {frmMain},
   uDM in 'uDM.pas' {DM: TDataModule},
-  uCategoriasDespesa in 'uCategoriasDespesa.pas' {frmCategoriasDespesa},
-  uCategoriasReceita in 'uCategoriasReceita.pas' {frmCategoriasReceita},
-  uGeracaoParcelas in 'uGeracaoParcelas.pas' {frmGeracaoParcelas},
-  uCalendario in 'uCalendario.pas' {frmCalendario},
-  uLogin in 'uLogin.pas' {frmLogin},
-  uFuncoes in 'uFuncoes.pas',
-  uUsuarios in 'uUsuarios.pas' {frmUsuarios},
-  uImprDespesas in 'uImprDespesas.pas' {frmImprDespesas},
-  uRelDespesas in 'uRelDespesas.pas' {frmRelDespesas},
-  uExpoPlanExelAnual in 'uExpoPlanExelAnual.pas' {frmExpoPlanExelAnual},
-  uListaDesejos in 'uListaDesejos.pas' {frmListaDesejos};
+  uDMRest in 'uDMRest.pas' {DMRest: TDataModule},
+  CategoriasReceita in 'Model\CategoriasReceita.pas',
+  Despesa in 'Model\Despesa.pas',
+  ListaDesejos in 'Model\ListaDesejos.pas',
+  Receita in 'Model\Receita.pas',
+  Usuario in 'Model\Usuario.pas',
+  CategoriasDespesa in 'Model\CategoriasDespesa.pas',
+  Bcrypt in 'Controller\Utils\Bcrypt.pas',
+  Funcoes in 'Controller\Utils\Funcoes.pas',
+  ListaCategoriasDespesa in 'Model\ListaCategoriasDespesa.pas',
+  uCalendario in 'View\uCalendario.pas' {frmCalendario},
+  uCategoriasDespesa in 'View\uCategoriasDespesa.pas' {frmCategoriasDespesa},
+  uCategoriasReceita in 'View\uCategoriasReceita.pas' {frmCategoriasReceita},
+  uExpoPlanExelAnual in 'View\uExpoPlanExelAnual.pas' {frmExpoPlanExelAnual},
+  uGeracaoParcelas in 'View\uGeracaoParcelas.pas' {frmGeracaoParcelas},
+  uImprDespesas in 'View\uImprDespesas.pas' {frmImprDespesas},
+  uListaDesejos in 'View\uListaDesejos.pas' {frmListaDesejos},
+  uLogin in 'View\uLogin.pas' {frmLogin},
+  uMain in 'View\uMain.pas' {frmMain},
+  uRelDespesas in 'View\uRelDespesas.pas' {frmRelDespesas},
+  uUsuarios in 'View\uUsuarios.pas' {frmUsuarios},
+  LoginController in 'Controller\LoginController.pas',
+  LoginDAO in 'Model\DAO\LoginDAO.pas',
+  UsuarioDAO in 'Model\DAO\UsuarioDAO.pas',
+  UsuarioController in 'Controller\UsuarioController.pas',
+  Nivel in 'Model\Nivel.pas',
+  NivelDAO in 'Model\DAO\NivelDAO.pas',
+  CategoriasDespesaDAO in 'Model\DAO\CategoriasDespesaDAO.pas',
+  CategoriasReceitaDAO in 'Model\DAO\CategoriasReceitaDAO.pas',
+  CategoriasDespesaController in 'Controller\CategoriasDespesaController.pas',
+  CategoriasReceitaController in 'Controller\CategoriasReceitaController.pas',
+  DespesaController in 'Controller\DespesaController.pas',
+  DespesaDAO in 'Model\DAO\DespesaDAO.pas',
+  ReceitaDAO in 'Model\DAO\ReceitaDAO.pas',
+  ReceitaController in 'Controller\ReceitaController.pas',
+  NivelController in 'Controller\NivelController.pas',
+  MainDAO in 'Model\DAO\MainDAO.pas',
+  MainController in 'Controller\MainController.pas';
 
 {$R *.res}
 var
-  nIdUsuario   : Integer;
-  cNomeUsuario : String;
+  idUsuario : Integer;
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDMRest, DMRest);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmListaDesejos, frmListaDesejos);
   if FrmLogin.ShowModal = mrOk then //Caso o retorno da tela seja Ok
   begin
-    nIdUsuario   := frmLogin.nIdUsuario;
-    cNomeUsuario := frmLogin.cNomeUsuario;
-
+    idUsuario := FrmLogin.idUsuario;
     FreeAndNil(FrmLogin); //Libera o form de Login da memória
     Application.CreateForm(TfrmMain, frmMain); //Cria a janela main
-
-    frmMain.nIdUsuario := nIdUsuario;
-    frmMain.cNomeUsuario := cNomeUsuario;
-
+    frmMain.idUsuario := idUsuario;
     Application.Run; //Roda a aplicação
   end
   else //Caso o retorno da tela de Login seja mrCancel então
     Application.Terminate; //Encerra a aplicação
-
-  Application.Run;
 end.
